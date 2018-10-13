@@ -33,6 +33,10 @@ class Signup extends Component {
     if(user.phone.length < 10) {
       errors.phone = 'Phone number must be 10 digits'
     }
+    if(user.password.length < 4) {
+      errors.password = 'Password must be at least 4 characters';
+    }
+
     if(Object.keys(errors).length > 0) {
       this.setState({ errors });
       return;
@@ -77,6 +81,8 @@ class Signup extends Component {
     }
     if(passwordMisMatch) {
       passwordAlert = <Alert color="danger">Passwords do not match!</Alert>
+    } else if(errors.password) {
+      passwordAlert = <Alert color="danger">{errors.password}</Alert>
     }
     function formatPhone(number) {
       if(number.length < 1) {
@@ -126,7 +132,7 @@ class Signup extends Component {
 }
 
 const mapStateToProps = state => ({
-  weather: state.weatherReducer.weather,
+  error: state.errorReducer.error,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -1,12 +1,12 @@
 /*
-  Weather Reducer
+  Error Reducer
 */
 
 export default (state = {}, action) => {
   switch (action.type) {
-    case 'RECEIVE_WEATHER':
+    case 'RECEIVE_ERROR':
       return {
-        weather: action.weather,
+        error: action.error,
       };
     default:
       return state;

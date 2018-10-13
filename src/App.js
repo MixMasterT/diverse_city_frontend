@@ -8,7 +8,6 @@ import {
 
 import BootstrapProof from './components/BootstrapProof';
 import Signup from './components/Signup';
-import Weather from './components/weather';
 
 class App extends Component {
   constructor(props) {
@@ -31,13 +30,12 @@ toggle() {
           <Jumbotron>
             <Container fluid>
               <Route exact path="/" component={BootstrapProof} />
-              <Route exact path="/weather" component={Weather} />
               <Route exact path="/signup" component={Signup} />
             </Container>
           </Jumbotron>
           <Navbar>
             <NavLink href="/"><i className="fa fa-home fa-3x"></i></NavLink>
-            <NavLink href="/weather">Weather</NavLink>
+            <NavLink href="/signup">Signup</NavLink>
           </Navbar>
         </div>
       </Router>
