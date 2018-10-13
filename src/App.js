@@ -7,6 +7,7 @@ import {
   NavLink } from 'reactstrap';
 
 import BootstrapProof from './components/BootstrapProof';
+import Signup from './components/Signup';
 import Weather from './components/weather';
 
 class App extends Component {
@@ -31,6 +32,7 @@ toggle() {
             <Container fluid>
               <Route exact path="/" component={BootstrapProof} />
               <Route exact path="/weather" component={Weather} />
+              <Route exact path="/signup" component={Signup} />
             </Container>
           </Jumbotron>
           <Navbar>
