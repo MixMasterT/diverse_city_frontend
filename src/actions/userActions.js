@@ -1,6 +1,6 @@
 import * as apiCalls from './apiCalls';
 import { receiveError } from './errorActions';
-export const POST_USER = 'POST_USER';
+export const RECEIVE_USER = 'RECEIVE_USER';
 
 export const postUser = (userObject) => async (dispatch) => {
   let postUserResponse;
@@ -15,7 +15,7 @@ export const postUser = (userObject) => async (dispatch) => {
     const user = await postUserResponse.json();
     console.log('user: ', user);
     return dispatch({
-      type: POST_USER,
+      type: RECEIVE_USER,
       user,
     });
   } else {
@@ -34,7 +34,7 @@ export const loginUser = (credentials) => async (dispatch) => {
   const user = await loginUserResponse.json();
   console.log('user: ', user);
   return dispatch({
-    type: POST_USER,
+    type: RECEIVE_USER,
     user,
   });
 }

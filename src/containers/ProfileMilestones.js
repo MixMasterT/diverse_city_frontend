@@ -7,6 +7,7 @@ import ProfileMilestones from '../components/ProfileMilestones';
 
 
 const mapStateToProps = state => ({
+  user: state.userReducer.user,
   milestones: [
     {
       id: 1234,

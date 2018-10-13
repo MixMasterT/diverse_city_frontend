@@ -1,12 +1,12 @@
 /*
-  Error Reducer
+  User Reducer
 */
 
 export default (state = {}, action) => {
   switch (action.type) {
-    case 'RECEIVE_ERROR':
+    case 'RECEIVE_USER':
       return {
-        apiError: action.error,
+        user: action.user,
       };
     default:
       return state;
