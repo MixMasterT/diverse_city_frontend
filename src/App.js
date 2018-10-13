@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
+import createDeepstream from 'deepstream.io-client-js';
 import logo from './logo.svg';
 import './App.css';
 import Weather from './components/weather';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.ds = createDeepstream('http://www.rhov.io:6020/deepstream');
+    this.client = this.ds.login();
+  }
   render() {
     return (
       <div className="App">
