@@ -1,9 +1,25 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { Jumbotron, Button, Modal } from 'reactstrap';
+
 import Weather from './components/weather';
 
 class App extends Component {
+  constructor(props) {
+  super(props);
+  this.state = {
+    modal: false
+  };
+
+  this.toggle = this.toggle.bind(this);
+}
+
+toggle() {
+  this.setState({
+    modal: !this.state.modal,
+  });
+}
   render() {
     return (
       <div className="App">
@@ -22,6 +38,17 @@ class App extends Component {
           </a>
         </header>
         <Weather />
+        <Jumbotron>
+          <h1 className="display-3">Proof of Bootstrap</h1>
+          <p>This is mere proof that bootstrap was loaded correctly</p>
+          <Button color="primary" onClick={this.toggle}>Click Me</Button>
+        </Jumbotron>
+        <Modal
+          isOpen={this.state.modal}
+          toggle={this.toggle}
+        >
+          Modal content...
+        </Modal>
       </div>
     );
   }
