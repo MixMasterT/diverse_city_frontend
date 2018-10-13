@@ -1,3 +1,12 @@
+
+:root {
+  --grey: #979797;
+  --light-grey: #F5F5F5;
+  --yellow: #F8E71C;
+  --blue: #016FC4;
+  --green: #50E3C2;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -21,18 +30,24 @@ code {
 }
 
 .jumbotron {
-  min-height: calc(100% - 80px);
+  min-height: calc(100% - 65px);
   margin-bottom: 0;
   border-radius: 0;
+
+  background-color: #FFFFFF;
 }
 
 nav.navbar {
   position: sticky;
   bottom:0; right:0; left:0;
-  background-color: #ffffff;
+  background-color: var(--light-grey);
   box-shadow: 2px -2px 0 -2px rgba(0,0,0,.2);
 }
 
 .goal-link {
   color: inherit;
+}
+
+nav a {
+  color: var(--grey);
 }

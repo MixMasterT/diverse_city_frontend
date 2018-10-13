@@ -46,7 +46,7 @@ class App extends Component {
               <i className="fa fa-comments fa-2x" />
             </NavLink>
             <NavLink href="/settings">
-              <i className="fa fa-cogs fa-2x" />
+              <i className="fa fa-cog fa-2x" />
             </NavLink>
           </Navbar>
         </div>
