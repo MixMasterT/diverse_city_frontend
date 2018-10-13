@@ -5,5 +5,4 @@ import { assignMilestone } from '../actions/milestoneActions';
 
 import ProfileSettings from '../components/ProfileSettings';
 
-
 export default connect(null, null)(ProfileSettings);
