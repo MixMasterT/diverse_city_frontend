@@ -1,19 +1,19 @@
 /*
-  User Reducer
+  Goal Reducer
 */
-import { mockUser } from "../fixtures/mockUser";
-const WHICH_STATE = "Prod";
+import { mockGoals } from "../fixtures/mockGoals";
+const WHICH_STATE = "Dev";
 var DEFAULT_STATE = {};
 if (WHICH_STATE === "Dev") {
-  DEFAULT_STATE = { user: mockUser || {} };
+  DEFAULT_STATE = { goals: mockGoals || {} };
 }
 
 export default (state = DEFAULT_STATE, action) => {
   switch (action.type) {
-    case "RECEIVE_USER":
+    case "UPDATE_GOALS":
       return {
         ...state,
-        user: action.user
+        goals: action.goals
       };
     default:
       return state;
