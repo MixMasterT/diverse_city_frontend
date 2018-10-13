@@ -1,5 +1,4 @@
 import React from 'react';
-import { withRouter } from "react-router-dom";
 import PropTypes from 'prop-types';
 
 const ProfileMilestones = ({ user }) => (
@@ -35,4 +34,4 @@ ProfileMilestones.propTypes = {
   milestones: PropTypes.arrayOf(PropTypes.object)
 };
 
-export default withRouter(ProfileMilestones);
+export default ProfileMilestones;
