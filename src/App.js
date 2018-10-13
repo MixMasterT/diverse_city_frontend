@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { Jumbotron, Button, Modal } from 'reactstrap';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import {
+  Jumbotron,
+  Container,
+  Navbar,
+  NavLink } from 'reactstrap';
 
+import BootstrapProof from './components/BootstrapProof';
 import Weather from './components/weather';
 
 class App extends Component {
@@ -11,7 +15,6 @@ class App extends Component {
   this.state = {
     modal: false
   };
-
   this.toggle = this.toggle.bind(this);
 }
 
@@ -22,34 +25,20 @@ toggle() {
 }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-        <Weather />
-        <Jumbotron>
-          <h1 className="display-3">Proof of Bootstrap</h1>
-          <p>This is mere proof that bootstrap was loaded correctly</p>
-          <Button color="primary" onClick={this.toggle}>Click Me</Button>
-        </Jumbotron>
-        <Modal
-          isOpen={this.state.modal}
-          toggle={this.toggle}
-        >
-          Modal content...
-        </Modal>
-      </div>
+      <Router>
+        <div className="app">
+          <Jumbotron>
+            <Container fluid>
+              <Route exact path="/" component={BootstrapProof} />
+              <Route exact path="/weather" component={Weather} />
+            </Container>
+          </Jumbotron>
+          <Navbar>
+            <NavLink href="/"><i className="fa fa-home fa-3x"></i></NavLink>
+            <NavLink href="/weather">Weather</NavLink>
+          </Navbar>
+        </div>
+      </Router>
     );
   }
 }
