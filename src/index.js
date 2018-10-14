@@ -12,12 +12,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.min.css';
 import './index.css';
 
-let initialState = {
-  weather: null,
-}
-
 ReactDOM.render(
-  <Provider store={configureStore(initialState)}>
+  <Provider store={configureStore()}>
     <App />
   </Provider>,
   document.getElementById('root'));
