@@ -129,7 +129,7 @@ class SelectLanguage extends Component {
                 onClick={() => this.closeAndClear()}
                 style={{marginLeft: '2rem'}}
               >
-                Choose a different langauge
+                Choose a different language
               </Button>
             </Row>
           </ModalFooter>
