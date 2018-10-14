@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Jumbotron, Container, Navbar, NavLink } from "reactstrap";
 
-import Browse from "./components/Browse";
+import Browse from "./containers/Browse";
 import ProfileGoals from "./containers/ProfileGoals";
 import ProfileSettings from "./containers/ProfileSettings";
 import GoalsContainer from "./containers/GoalsContainer";
@@ -28,7 +28,7 @@ class App extends Component {
         <div className="app">
           <Jumbotron>
             <Container fluid>
-              <Route exact path="/" component={Browse} />
+              <Route exact path="/browse" component={Browse} />
               <Route exact path="/profile" component={ProfileGoals} />
               <Route exact path="/settings" component={ProfileSettings} />
               <Route exact path="/goals" component={GoalsContainer} />
@@ -36,7 +36,7 @@ class App extends Component {
             </Container>
           </Jumbotron>
           <Navbar>
-            <NavLink href="/">
+            <NavLink href="/browse">
               <i className="fa fa-home fa-2x" />
             </NavLink>
             <NavLink href="/profile">
