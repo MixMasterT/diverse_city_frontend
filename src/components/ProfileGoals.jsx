@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const ProfileMilestones = ({ user }) =>
+const ProfileGoals = ({ user }) =>
   user ? (
     <div className="profile-milestones-view">
       <div className="text-center">
@@ -28,8 +28,8 @@ const ProfileMilestones = ({ user }) =>
     </span>
   );
 
-ProfileMilestones.propTypes = {
+ProfileGoals.propTypes = {
   milestones: PropTypes.arrayOf(PropTypes.object)
 };
 
-export default ProfileMilestones;
+export default ProfileGoals;
