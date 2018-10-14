@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import {
   Row,
   Col,
@@ -186,8 +187,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  postUser: (user) => dispatch(postUser(user)),
+  postUser: (user, history) => dispatch(postUser(user, history)),
   resolveError: () => dispatch(resolveError()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Signup));
