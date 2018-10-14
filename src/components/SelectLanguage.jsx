@@ -31,14 +31,14 @@ class SelectLanguage extends Component {
       youSelected: 'You have selected',
       asPreferred: 'as your preferred language',
       moveOn: 'Move On',
-      chooseDifferent: 'Choose a different language'
+      chooseDifferent: 'Choose a different language',
+      selectedLanguage: this.props.language ? this.props.language.name : null
     };
     this.state = {
       selectedLanguage: this.props.language || null,
       filterTerm: '',
       modalIsOpen: false,
       pageText: this.pageText,
-      // translation: this.props.translation
     };
     this.updateFilterTerm = this.updateFilterTerm.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
@@ -62,6 +62,7 @@ class SelectLanguage extends Component {
       modalIsOpen: true,
     });
     this.props.selectLanguage(language);
+    this.pageText.selectedLanguage = language.name;
     this.props.fetchTranslation(this.pageText, language, 'selectLanguage')
   }
 
@@ -85,7 +86,7 @@ class SelectLanguage extends Component {
         <h3 className="text-center">{!this.props.translation ? state.pageText.selectLanguage : this.props.translation.translation.selectLanguage}</h3>
         <Row>
           <Col xs="12">
-            {!this.props.translation ? state.pageText.preferredLanguage : this.props.translation.translation.preferredLanguage}: {this.state.selectedLanguage || 'none'}
+            {!this.props.translation ? state.pageText.preferredLanguage : this.props.translation.translation.preferredLanguage}: {!this.props.translation ? this.state.selectedLanguage || 'none' : this.props.translation.translation.selectedLanguage}
           </Col>
         </Row>
         <Form>
@@ -130,7 +131,7 @@ class SelectLanguage extends Component {
         >
           <ModalHeader>{!this.props.translation ? state.pageText.success : `${this.props.translation.translation.success}`}!</ModalHeader>
           <ModalBody>
-            {!this.props.translation ? state.pageText.youSelected : this.props.translation.translation.youSelected} <mark>{this.state.selectedLanguage}</mark> {!this.props.translation ? state.pageText.asPreferred : this.props.translation.translation.asPreferred}.
+            {!this.props.translation ? state.pageText.youSelected : this.props.translation.translation.youSelected} <mark>{this.props.translation ? this.props.translation.translation.selectedLanguage : this.state.selectedLanguage}</mark> {!this.props.translation ? state.pageText.asPreferred : this.props.translation.translation.asPreferred}.
           </ModalBody>
           <ModalFooter>
             <Row
