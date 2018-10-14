@@ -7,11 +7,17 @@ import Browse from '../components/Browse';
 
 
 const mapStateToProps = state => ({
-  categories: ['financial', 'legal', 'employment', 'child']
+  searchText: '',
+  goals: [
+    {id:1, name: 'What is a goal?'},
+    {id:2, name: 'What is a goal?'},
+    {id:3, name: 'What is a goal?'},
+    {id:4, name: 'What is a goal?'}
+  ]
 });
 
 const mapDispatchToProps = dispatch => ({
-  assignMilestone: () => dispatch(assignMilestone())
+  searchGoals: () => console.log('trying to search')
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Browse);
