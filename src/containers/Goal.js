@@ -7,11 +7,15 @@ import Goal from '../components/Goal';
 
 
 const mapStateToProps = (state, ownProps) => {
-  const goalId = state.match.params.goalId;
-  const userId = state.match.params.userId;
+
+  const goalId = ownProps.match.params.goalId;
+  // const goalId = 1;
+  const userId = ownProps.match.params.userId;
+  // const userId = undefined;
+  const isOwner = userId !== undefined;
 
   let goal;
-  if (userId){
+  if (isOwner){
     console.log('USER GOAL!');
     goal = state.userReducer.user.goals.find((goal) => goal.g_id === goalId);
   } else {
@@ -20,8 +24,8 @@ const mapStateToProps = (state, ownProps) => {
   }
 
   return {
-      isOwner: userId !== undefined,
-      goal: goal
+      isOwner,
+      goal
   };
 };
 

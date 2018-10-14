@@ -15,9 +15,9 @@ const listItem = {
 class Goal extends React.Component {
   constructor(props) {
     super(props);
-		console.log('id is',this.props.match.params.id)
+
     this.state = {
-			date:new Date()
+			date: new Date(),
 		};
   }
 
@@ -35,29 +35,31 @@ class Goal extends React.Component {
     console.log(this.state);
     return (
       <div>
-        <h3>{this.state.goal.name}</h3>
-				<p>{this.state.goal.description.split('\n').map( (line,index)=>
-				<span key={index}><br/>{line}</span>
-				)}</p>
-					<ul>
+        <h3>{this.props.goal.name}</h3>
+				<p>
+          {this.props.goal.description.split('\n').map((line, index)=>
+            <span key={index}><br/>{line}</span>
+				  )}
+        </p>
+				<div className="list-group milestone-list-group">
 					{this.props.goal.milestones.map((milestone)=>
-						<li style={listItem} key={milestone.id}>
-								<div style={inline}>
-								{this.state.isOwned && milestone.completed ?
-								<i className="far fa-check-square"></i>
-								:
-								<i className="far fa-square"></i>
-								}
+						<div key={milestone.muid} className="list-group-item milestone-link">
+								<div className="milestone-icon">
+                  {this.state.isOwned && milestone.completed ?
+                    <i className="far fa-check-square"></i>
+                  :
+                    <i className="far fa-square"></i>
+                  }
 								</div>
-							<Link to={this.state.isOwned? `/objective/${this.props.match.params.userId}/${this.props.match.params.goalId}/${milestone.id}` : `/objective/${this.props.match.params.goalId}/${milestone.id}`}>{milestone.name}</Link>
-						</li>
+                <Link to={this.state.isOwned? `/objective/${this.props.match.params.userId}/${this.props.goal.g_id}/${milestone.muid}` : `/objective/${this.props.goal.g_id}/${milestone.muid}`}>{milestone.name}</Link>
+            </div>
 					)}
-					</ul>
-					{!this.props.isOwned &&
-						<div>
-							<button className="btn btn-primary"><i className="fas fa-plus"></i> Add</button><br/>
-						</div>
-					}
+				</div>
+				{!this.props.isOwned &&
+					<div className="text-center">
+						<button id="start-goal" className="btn btn-primary"><i className="fas fa-plus"></i> Start Goal</button><br/>
+					</div>
+				}
       </div>
     );
   }
