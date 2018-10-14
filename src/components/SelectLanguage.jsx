@@ -30,7 +30,7 @@ class SelectLanguage extends Component {
       success: 'Success',
       youSelected: 'You have selected',
       asPreferred: 'as your preferred language',
-      moveOn: 'Move On',
+      moveOn: 'Continue',
       chooseDifferent: 'Choose a different language',
       selectedLanguage: this.props.language ? this.props.language.name : null
     };
@@ -139,17 +139,17 @@ class SelectLanguage extends Component {
               style={{marginRight: '2rem'}}
             >
               <Button
-                color="primary"
-                onClick={() => this.props.history.push('/login')}
-              >
-                {!this.props.translation ? state.pageText.moveOn : this.props.translation.translation.moveOn}
-              </Button>
-              <Button
                 color="warning"
                 onClick={() => this.closeAndClear()}
-                style={{marginLeft: '2rem'}}
               >
                 {!this.props.translation ? state.pageText.chooseDifferent : this.props.translation.translation.chooseDifferent}
+              </Button>
+              <Button
+                color="primary"
+                onClick={() => this.props.history.push('/login')}
+                style={{marginLeft: '2rem'}}                
+              >
+                {!this.props.translation ? state.pageText.moveOn : this.props.translation.translation.moveOn}
               </Button>
             </Row>
           </ModalFooter>
