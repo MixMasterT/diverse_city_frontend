@@ -3,9 +3,10 @@ import PropTypes from "prop-types";
 
 const ProfileGoals = ({ user }) =>
   user ? (
-    <div className="profile-milestones-view">
+    <div className="profile-goals">
       <div className="text-center">
-        <i className="fa fa-th-list fa-3x" />
+        <i className="fa fa-th-list fa-5x" />
+        <h3>Goals</h3>
       </div>
       {user.goals && user.goals.length > 0 ? (
         <ul>
@@ -29,7 +30,8 @@ const ProfileGoals = ({ user }) =>
   );
 
 ProfileGoals.propTypes = {
-  milestones: PropTypes.arrayOf(PropTypes.object)
+  user: PropTypes.object,
+  loadUserGoals: PropTypes.func
 };
 
 export default ProfileGoals;

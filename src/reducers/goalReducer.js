@@ -10,10 +10,16 @@ if (WHICH_STATE === "Dev") {
 
 export default (state = DEFAULT_STATE, action) => {
   switch (action.type) {
+    case "FETCH_GOALS":
+      return {
+        ...state,
+        fetching: true,
+      }
     case "UPDATE_GOALS":
       return {
         ...state,
-        goals: action.goals
+        goals: action.goals,
+        fetching: false
       };
     default:
       return state;

@@ -40,9 +40,9 @@ class App extends Component {
               <Route exact path="/login" component={Login} />
               <Route exact path="/" component={SelectLanguage} />
               <Route exact path="/select_language" component={SelectLanguage} />
+              <Route exact path="/goal/:goalId" component={Goal} />
 							<Route exact path="/goal/:userId/:goalId" component={Goal} />
 							<Route exact path="/objective/:userId/:goalId/:objectiveId" component={Objective} />
-							<Route exact path="/goal/:goalId" component={Goal} />
 							<Route exact path="/objective/:goalId/:objectiveId" component={Objective} />
             </Container>
           </Jumbotron>

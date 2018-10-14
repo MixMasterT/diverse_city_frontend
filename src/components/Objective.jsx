@@ -33,6 +33,7 @@ class Objective extends React.Component {
 			goal:{
 				name:"Open A Bank Account"
 			},
+			isOwned:this.props.match.params.userId !== undefined,
 			objective:{
 				name:"Identification Card",
 				description:`Based on your current location, these are the requirements for an identification card in Missouri:
@@ -75,10 +76,15 @@ class Objective extends React.Component {
     return (
       <div>
         <h1>{this.state.objective.name}</h1>
+					{this.state.isOwned && 
+						<div>
+							<button className="btn btn-success"><i className="fas fa-check"></i> Mark As Complete</button><br/>
+						</div>
+					}
 				<p>{this.state.objective.description.split('\n').map( (line,index)=>
 				<span key={index}><br/>{line}</span>
 				)}</p>
-					
+					{this.state.isOwned && 
 					<div className="form-group">
 						<h2>Message an Expert:</h2>
 						<hr />
@@ -94,8 +100,9 @@ class Objective extends React.Component {
 							</p>
 						}
 						<label htmlFor="newMsg">New Message:</label><input className="form-control" id="newMsg" type="text"/>
-						<button className="btn btn-primary">Send</button><br/>
+						<button className="btn btn-primary"><i className="fas fa-comment-plus"></i> Send</button><br/>
 					</div>
+					}
 					
 					<h2>Summaries of previous conversations</h2>
 					

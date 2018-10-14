@@ -13,9 +13,7 @@ const ProfileSettings = ({logout, history}) => {
   }
   return (
   <div className="ProfileSettings d-flex flex-column justify-content-between ">
-    <div className="text-center">
-      <i className="fa fa-cog fa-3x"></i>
-    </div>
+    <h3>Settings</h3>
     <Button onClick={handleLogout} style={buttonStyles}>Logout</Button>
     <Button
       onClick={() => history.push('/select_language')}
