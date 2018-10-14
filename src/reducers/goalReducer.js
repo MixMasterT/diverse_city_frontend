@@ -2,7 +2,7 @@
   Goal Reducer
 */
 import { mockGoals } from "../fixtures/mockGoals";
-const WHICH_STATE = "Dev";
+const WHICH_STATE = "Prod";
 var DEFAULT_STATE = {};
 if (WHICH_STATE === "Dev") {
   DEFAULT_STATE = { goals: mockGoals || {} };
