@@ -1,23 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { assignMilestone } from '../actions/milestoneActions';
+import {fetchAllGoals} from "../actions/browseActions";
 
 import Browse from '../components/Browse';
 
 
 const mapStateToProps = state => ({
   searchText: '',
-  goals: [
-    {id:1, name: 'What is a goal?'},
-    {id:2, name: 'What is a goal?'},
-    {id:3, name: 'What is a goal?'},
-    {id:4, name: 'What is a goal?'}
-  ]
+  goals: state.goalReducer.goals,
+  goalsFetching: state.goalReducer ? state.goalReducer.fetching : false
 });
 
 const mapDispatchToProps = dispatch => ({
-  searchGoals: () => console.log('trying to search')
+  searchGoals: () => console.log('trying to search'),
+  loadGoals: () => dispatch(fetchAllGoals())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Browse);
