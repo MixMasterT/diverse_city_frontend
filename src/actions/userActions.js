@@ -1,5 +1,8 @@
 import * as apiCalls from './apiCalls';
 import { receiveApiError } from './errorActions';
+
+const DEFAULT_LOGGED_IN_SCREEN = '/browse';
+
 export const RECEIVE_USER = 'RECEIVE_USER';
 
 export const postUser = (userObject, history) => async (dispatch) => {
@@ -12,7 +15,7 @@ export const postUser = (userObject, history) => async (dispatch) => {
   };
   if(postUserResponse.ok) {
     const user = await postUserResponse.json();
-    history.push('/home');
+    history.push(DEFAULT_LOGGED_IN_SCREEN);
     return dispatch({
       type: RECEIVE_USER,
       user,
@@ -33,7 +36,7 @@ export const loginUser = (credentials, history) => async (dispatch) => {
   };
   if(loginUserResponse.ok) {
     const user = await loginUserResponse.json();
-    history.push('/home'); // redirect to home screen upon successful login
+    history.push(DEFAULT_LOGGED_IN_SCREEN); // redirect to home screen upon successful login
     return dispatch({
       type: RECEIVE_USER,
       user,
