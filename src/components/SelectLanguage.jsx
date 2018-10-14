@@ -21,23 +21,24 @@ import { fetchTranslation } from '../actions/translationActions';
 class SelectLanguage extends Component {
   constructor(props) {
     super(props);
-    this.pageText = [
-      'Select Language',
-      'Your preferred language',
-      'Filter Languages',
-      'Clear Filter',
-      'Language',
-      'Success',
-      'You have selected',
-      'as your preferred language',
-      'Move On',
-      'Choose a different language'
-    ];
+    this.pageText = {
+      selectLanguage: 'Select Language',
+      preferredLanguage: 'Your preferred language',
+      filterLanguages: 'Filter Languages',
+      clearFilter: 'Clear Filter',
+      language: 'Language',
+      success: 'Success',
+      youSelected: 'You have selected',
+      asPreferred: 'as your preferred language',
+      moveOn: 'Move On',
+      chooseDifferent: 'Choose a different language'
+    };
     this.state = {
       selectedLanguage: this.props.language || null,
       filterTerm: '',
       modalIsOpen: false,
       pageText: this.pageText,
+      // translation: this.props.translation
     };
     this.updateFilterTerm = this.updateFilterTerm.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
@@ -81,22 +82,22 @@ class SelectLanguage extends Component {
     const state = this.state;
     return (
       <div>
-        <h3 className="text-center">{state.pageText[0]}</h3>
+        <h3 className="text-center">{!state.translation ? state.pageText.selectLanguage : state.translation.selectLanguage}</h3>
         <Row>
           <Col xs="12">
-            {state.pageText[1]}: {this.state.selectedLanguage || 'none'}
+            {!state.translation ? state.pageText.preferredLanguage : state.translation.preferredLanguage}: {this.state.selectedLanguage || 'none'}
           </Col>
         </Row>
         <Form>
           <Row>
             <Col sm="6">
               <FormGroup>
-                <Label>{state.pageText[2]}</Label>
+                <Label>{!this.props.translation ? state.pageText.filterLanguages : this.props.translation.filterLanguages}</Label>
                 <Input onChange={this.updateFilterTerm} />
               </FormGroup>
             </Col>
             <Col sm="6">
-              <Button onClick={this.clearFilter}>{state.pageText[3]}</Button>
+              <Button onClick={this.clearFilter}>{!this.props.translation ? state.pageText.clearFilter : this.props.translation.clearFilter}</Button>
             </Col>
           </Row>
 
@@ -105,7 +106,7 @@ class SelectLanguage extends Component {
           <thead>
             <tr>
               <th xs="2">#</th>
-              <th xs="10">{state.pageText[4]}</th>
+              <th xs="10">{!this.props.translation ? state.pageText.language : this.props.translation.language}</th>
             </tr>
           </thead>
           <tbody>
@@ -125,10 +126,11 @@ class SelectLanguage extends Component {
           color="success"
           isOpen={this.state.modalIsOpen}
           toggle={this.toggleModal}
+          props={this.props}
         >
-          <ModalHeader>{state.pageText[5]}!</ModalHeader>
+          <ModalHeader>{!this.props.translation ? state.pageText.success : `${this.props.translation.translation.success}`}!</ModalHeader>
           <ModalBody>
-            {state.pageText[6]} <mark>{this.state.selectedLanguage}</mark> {state.pageText[7]}.
+            {!this.props.translation ? state.pageText.youSelected : this.props.translation.youSelected} <mark>{this.state.selectedLanguage}</mark> {!state.translation ? state.pageText.asPreferred : state.translation.asPreferred}.
           </ModalBody>
           <ModalFooter>
             <Row
@@ -139,14 +141,14 @@ class SelectLanguage extends Component {
                 color="primary"
                 onClick={() => this.props.history.push('/login')}
               >
-                {state.pageText[8]}
+                {!this.props.translation ? state.pageText.moveOn : this.props.translation.moveOn}
               </Button>
               <Button
                 color="warning"
                 onClick={() => this.closeAndClear()}
                 style={{marginLeft: '2rem'}}
               >
-                {state.pageText[9]}
+                {!this.props.translation ? state.pageText.chooseDifferent : this.props.translation.chooseDifferent}
               </Button>
             </Row>
           </ModalFooter>

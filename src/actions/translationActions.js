@@ -13,7 +13,7 @@ export const fetchTranslation = (textArray, targetLanguage, key) => async (dispa
   };
   if(translationResult.ok) {
     const translation = await translationResult.json();
-    console.log('tranlsated text: ', JSON.parse(translation));
+    console.log('tranlsated text: ', translation);
     console.log('translation: ', translation);
     return dispatch({
       type: RECEIVE_TRANSLATION,

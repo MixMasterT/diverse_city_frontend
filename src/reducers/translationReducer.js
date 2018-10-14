@@ -1,9 +1,9 @@
 /*
   Translation Reducer
 */
-import { RECEIVE_TRANSLATION } from '../actions/userActions';
+import { RECEIVE_TRANSLATION } from '../actions/translationActions';
 
-export default (state = null, action) => {
+const translation = (state = null, action) => {
   switch (action.type) {
     case RECEIVE_TRANSLATION:
       return {
@@ -13,3 +13,5 @@ export default (state = null, action) => {
       return state;
   }
 };
+
+export default translation;
