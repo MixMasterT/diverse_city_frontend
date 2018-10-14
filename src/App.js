@@ -8,7 +8,7 @@ import ProfileSettings from "./containers/ProfileSettings";
 import GoalsContainer from "./containers/GoalsContainer";
 import Signup from "./components/Signup";
 import Login from './components/Login';
-
+import SelectLanguage from './components/SelectLanguage';
 
 class App extends Component {
   constructor(props) {
@@ -36,6 +36,7 @@ class App extends Component {
               <Route exact path="/goals" component={GoalsContainer} />
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/login" component={Login} />
+              <Route exact path="/select_language" component={SelectLanguage} />
             </Container>
           </Jumbotron>
           <Navbar>
