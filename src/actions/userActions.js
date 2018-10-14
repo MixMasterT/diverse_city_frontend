@@ -1,5 +1,5 @@
 import * as apiCalls from './apiCalls';
-import { receiveError } from './errorActions';
+import { receiveApiError } from './errorActions';
 export const RECEIVE_USER = 'RECEIVE_USER';
 
 export const postUser = (userObject) => async (dispatch) => {
@@ -13,13 +13,15 @@ export const postUser = (userObject) => async (dispatch) => {
   // console.log('postUserResponse: ', postUserResponse.body;
   if(postUserResponse.ok) {
     const user = await postUserResponse.json();
-    console.log('user: ', user);
     return dispatch({
       type: RECEIVE_USER,
       user,
     });
   } else {
-    return receiveError(postUserResponse.statusText)
+    const message = await (await postUserResponse).text();
+    console.log('postUserResponse.body: ', message);
+    console.log('message: ', message);
+    return dispatch(receiveApiError(message));
   }
 }
 
@@ -28,13 +30,17 @@ export const loginUser = (credentials) => async (dispatch) => {
   try {
     loginUserResponse = await apiCalls.loginUser(credentials);
   } catch(error) {
-    console.log('Error posting user: ', error);
+    console.log('Error logging user in: ', error);
     return;
   };
-  const user = await loginUserResponse.json();
-  console.log('user: ', user);
-  return dispatch({
-    type: RECEIVE_USER,
-    user,
-  });
+  if(loginUserResponse.ok) {
+    const user = await loginUserResponse.json();
+    console.log('user: ', user);
+    return dispatch({
+      type: RECEIVE_USER,
+      user,
+    });
+  } else {
+    return receiveApiError(loginUserResponse.statusText);
+  }
 }

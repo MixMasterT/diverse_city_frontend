@@ -6,8 +6,13 @@ import {
   Label,
   Input,
   Alert,
-  Button } from 'reactstrap';
+  Button,
+  Modal,
+  ModalHeader,
+  ModalFooter } from 'reactstrap';
 import { postUser } from '../actions/userActions';
+import { resolveError } from '../actions/errorActions';
+
 
 class Signup extends Component {
   constructor(props) {
@@ -19,32 +24,34 @@ class Signup extends Component {
         phone: '',
       },
       errors: {}
-    }
+    };
     this.postUser = this.postUser.bind(this);
     this.updatePhoneNumber = this.updatePhoneNumber.bind(this);
     this.updateField = this.updateField.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
+    this.resolveAlert = this.resolveAlert.bind(this);
+    this.validateUser = this.validateUser.bind(this);
   }
 
-  postUser(e) {
-    e.preventDefault();
+  validateUser() {
     const user = this.state.user;
-    const errors = {}
-    // Validate
+    const errors = {};
     if(user.phone.length < 10) {
       errors.phone = 'Phone number must be 10 digits'
     }
     if(user.password.length < 4) {
       errors.password = 'Password must be at least 4 characters';
     }
+    this.setState({ errors });
+    return Object.keys(errors).length === 0;
+  }
 
-    if(Object.keys(errors).length > 0) {
-      this.setState({ errors });
-      return;
-    } else {
-      this.setState({ error: {} }, () => {
-        // Send
-        this.props.postUser(user);
-      });
+  postUser(e) {
+    e.preventDefault();
+    const user = this.state.user;
+    const errors = {}
+    if(this.validateUser()) {
+      this.props.postUser(user);
     }
   }
 
@@ -62,10 +69,27 @@ class Signup extends Component {
 
   updateField(fieldName) {
     return (e) => {
+      e.preventDefault()
       const user = this.state.user;
       user[fieldName] = e.target.value;
       this.setState({ user });
     }
+  }
+
+  toggleModal() {
+    this.setState({ modalIsOpen: !this.state.modalIsOpen });
+  }
+
+  resolveAlert() {
+    this.setState({
+      user: {
+        password: '',
+        confirmPassword: '',
+        phone: '',
+      },
+      errors: {}
+    });
+    this.props.resolveError();
   }
 
   render() {
@@ -75,14 +99,22 @@ class Signup extends Component {
                               user.password !== user.confirmPassword
     let passwordAlert = '';
     let phoneAlert = '';
+    let userErrorAlert = '';
     const errors = this.state.errors;
-    if(errors.phone) {
+    if(errors.phone && this.state.user.phone.length < 10) {
       phoneAlert = <Alert color="danger">{errors.phone}</Alert>
     }
     if(passwordMisMatch) {
       passwordAlert = <Alert color="danger">Passwords do not match!</Alert>
     } else if(errors.password) {
       passwordAlert = <Alert color="danger">{errors.password}</Alert>
+    }
+    const hasApiError = this.props.error && this.props.error.apiError;
+    if(hasApiError) {
+      userErrorAlert = (
+        <Alert color="danger">
+          {hasApiError}
+        </Alert>)
     }
     function formatPhone(number) {
       if(number.length < 1) {
@@ -126,17 +158,28 @@ class Signup extends Component {
           />
         </FormGroup>
         <Button onClick={this.postUser}>Register</Button>
+        <Modal isOpen={!!hasApiError}>
+          <ModalHeader>Error!</ModalHeader>
+          {userErrorAlert}
+          <ModalFooter>
+            <Button onClick={this.resolveAlert}>
+              OK, got it.
+            </Button>
+          </ModalFooter>
+        </Modal>
       </Form>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  error: state.errorReducer.error,
+  user: state.userReducer,
+  error: state.errorReducer,
 });
 
 const mapDispatchToProps = dispatch => ({
   postUser: (user) => dispatch(postUser(user)),
+  resolveError: () => dispatch(resolveError()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);
