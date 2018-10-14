@@ -13,7 +13,7 @@ import SelectLanguage from './components/SelectLanguage';
 import Goal from "./containers/Goal";
 import Objective from "./components/Objective";
 
-import {fetchAllGoals} from "./actions/browseActions";
+import {fetchAllGoals} from "./actions/goalActions";
 
 class App extends Component {
   constructor(props) {

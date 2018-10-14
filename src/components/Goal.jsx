@@ -31,8 +31,6 @@ class Goal extends React.Component {
   }
 
   render() {
-    console.log(this.props);
-    console.log(this.state);
     return (
       <div>
         <h3>{this.props.goal.name}</h3>
@@ -51,13 +49,21 @@ class Goal extends React.Component {
                     <i className="far fa-square"></i>
                   }
 								</div>
-                <Link to={this.state.isOwned? `/objective/${this.props.match.params.userId}/${this.props.goal.g_id}/${milestone.muid}` : `/objective/${this.props.goal.g_id}/${milestone.muid}`}>{milestone.name}</Link>
+                <Link to={this.state.isOwned? `/objective/${this.props.userPhone}/${this.props.goal.g_id}/${milestone.muid}` : `/objective/${this.props.goal.g_id}/${milestone.muid}`}>{milestone.name}</Link>
             </div>
 					)}
 				</div>
 				{!this.props.isOwned &&
 					<div className="text-center">
-						<button id="start-goal" className="btn btn-primary"><i className="fas fa-plus"></i> Start Goal</button><br/>
+						<button
+              id="start-goal"
+              className="btn btn-primary"
+              onClick={this.props.assignGoal(this.props.goal.g_id)}
+              >
+                <i className="fas fa-plus"></i>
+                Start Goal
+              </button>
+              <br/>
 					</div>
 				}
       </div>
@@ -67,7 +73,8 @@ class Goal extends React.Component {
 
 Goal.propTypes = {
   isOwner: PropTypes.bool,
-  goal: PropTypes.object
+  goal: PropTypes.object,
+  assignGoal: PropTypes.func
 }
 
 

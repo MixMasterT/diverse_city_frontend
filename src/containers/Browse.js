@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import {fetchAllGoals} from "../actions/browseActions";
+import {fetchAllGoals} from "../actions/goalActions";
 
 import Browse from '../components/Browse';
 

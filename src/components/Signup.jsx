@@ -165,7 +165,7 @@ class Signup extends Component {
           </FormGroup>
           <Row>
             <Col xs="6"><Button onClick={this.postUser}>Register</Button></Col>
-            <Col xs="6">Already registered? <Link href="/login">Go to login instead.</Link></Col>
+            <Col xs="6">Already registered? <Link to="/login">Go to login instead.</Link></Col>
           </Row>
           <Modal isOpen={!!hasApiError}>
             <ModalHeader>Error!</ModalHeader>

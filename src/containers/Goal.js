@@ -10,27 +10,26 @@ const mapStateToProps = (state, ownProps) => {
 
   const goalId = ownProps.match.params.goalId;
   // const goalId = 1;
-  const userId = ownProps.match.params.userId;
+  const userIdProvided = ownProps.match.params.userId;
   // const userId = undefined;
-  const isOwner = userId !== undefined;
+  const isOwner = userIdProvided !== undefined;
 
   let goal;
   if (isOwner){
-    console.log('USER GOAL!');
     goal = state.userReducer.user.goals.find((goal) => goal.g_id === goalId);
   } else {
-    console.log('CONTENT GOAL!');
     goal = state.goalReducer.goals.find((goal) => goal.g_id === goalId);
   }
 
   return {
-      isOwner,
-      goal
+    userPhone: state.userReducer.user.phone,
+    isOwner,
+    goal,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  assignGoal: () => dispatch(assignGoal())
+  assignGoal: (goalId) => () => dispatch(assignGoal(goalId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Goal);
