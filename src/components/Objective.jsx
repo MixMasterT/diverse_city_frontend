@@ -75,9 +75,11 @@ class Objective extends React.Component {
 		this.markAsComplete=this.markAsComplete.bind(this)
 		this.sendMessage=this.sendMessage.bind(this)
 		this.handleChange = this.handleChange.bind(this);
+		this.handleTAChange = this.handleTAChange.bind(this);
 		this.resolveChat = this.resolveChat.bind(this);
 		this.resolveIt = this.resolveIt.bind(this);
 		this.closeModal = this.closeModal.bind(this);
+		this.addSummary = this.addSummary.bind(this);
 	}
 	componentDidMount() {
 		const isOwned=this.props.match.params.userId !== undefined;
@@ -129,6 +131,10 @@ class Objective extends React.Component {
 	handleChange(event) {
     this.setState({newMessage: event.target.value});
   }
+	
+	handleTAChange(event) {
+    this.setState({suggestedSummary: event.target.value});
+  }
 
 	resolveChat(event) {
 		getSummary(this.state.objective.chat.messages.join('\n'))
@@ -141,7 +147,11 @@ class Objective extends React.Component {
 				
 			})
 	}
-	
+	addSummary() {
+		let summaries=this.state.summaries;
+		summaries.push(this.state.suggestedSummary);
+		this.setState(state=>({showModal:false,summaries:summaries}));
+	}
 	resolveIt() {
 		this.setState(state=>({
 			showModal:false,
@@ -241,13 +251,13 @@ class Objective extends React.Component {
 								<div className="modal-body">
 									<p>Would you like to share a summary of this conversation with others?</p>
 <p>									Here is a suggested summary:</p>
-									<textarea  rows="4" cols="50" value={this.state.suggestedSummary}></textarea>
+									<textarea  onChange={this.handleTAChange} rows="4" cols="50" value={this.state.suggestedSummary}></textarea>
 									
 								</div>
 								<div className="modal-footer">
 									<button type="button" className="btn btn-secondary" onClick={this.closeModal}>Cancel</button>
 									<button type="button" className="btn btn-primary" onClick={this.resolveIt}>Resolve without Saving Summary</button>
-									<button type="button" className="btn btn-primary" >Save Summary</button>
+									<button type="button" className="btn btn-primary" onClick={this.addSummary} >Save Summary</button>
 								</div>
 							</div>
 						</div>
