@@ -3,12 +3,17 @@ import PropTypes from 'prop-types';
 
 import {FormGroup, Input} from 'reactstrap';
 
+
 class Browse extends React.Component {
   componentDidMount() {
       this.props.loadGoals();
   }
 
   render () {
+    var buildGoalLink = goal => {
+      return `goal/${goal.g_id}`;
+    };
+
     return (
       <div className="browse">
         <h4>Home</h4>
@@ -23,14 +28,17 @@ class Browse extends React.Component {
           />
         </FormGroup>
         <h5>{`What are your goals?`}</h5>
-        { !this.props.goalsFetching && this.props.goals ? (
+          { !this.props.goalsFetching && this.props.goals ? (
           <div className="list-group">
             {this.props.goals.map((goal) => (
-              <div key={goal._id} className="list-group-item">{goal.name}</div>
+              <a key={goal.g_id} className="list-group-item goal-link" href={buildGoalLink(goal)}>
+                {goal.name}
+              </a>
+
             ))}
           </div>
         ) : (
-          <div><i className="fa fa-spinner fa-spin"></i> Loading Goals</div>
+          <div><i className="fa fa-spinner fa-spin fa-1x fa-fw" /> Loading Goals</div>
         )}
       </div>
     );

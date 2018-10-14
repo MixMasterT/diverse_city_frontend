@@ -15,9 +15,9 @@ export const fetchAllGoals = () => (dispatch) => {
     const goals = response.json();
     return goals.then(goalArray => {
       if (goalArray) {
-        dispatch({type: "UPDATE_GOALS", goals: goalArray});
+        return dispatch({type: "UPDATE_GOALS", goals: goalArray});
       } else {
-        dispatch({type: RECEIVE_API_ERROR})
+        return dispatch({type: RECEIVE_API_ERROR});
       }
     })
   });

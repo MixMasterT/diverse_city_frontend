@@ -13,12 +13,12 @@ const listItem = {
 class Goal extends React.Component {
   constructor(props) {
     super(props);
-		console.log('id is',this.props.match.params.id)
+
     this.state = {
 			isOwned:this.props.match.params.userId !== undefined,
 			goal:{
 				name:"Open A Bank Account",
-				
+
 				milestones:[
 					{name:"Identification Card",id:1,isComplete:true},
 					{name:"Utility Bill",isComplete:false,id:2},
@@ -55,7 +55,7 @@ class Goal extends React.Component {
 						</li>
 					)}
 					</ul>
-					{!this.state.isOwned && 
+					{!this.state.isOwned &&
 						<div>
 							<button className="btn btn-primary"><i className="fas fa-plus"></i> Add</button><br/>
 						</div>
