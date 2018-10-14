@@ -35,6 +35,7 @@ class Objective extends React.Component {
 			},
 			isOwned:this.props.match.params.userId !== undefined,
 			objective:{
+				completed:false,
 				name:"Identification Card",
 				description:`Based on your current location, these are the requirements for an identification card in Missouri:
 				You will need:
@@ -62,10 +63,14 @@ class Objective extends React.Component {
 			},
 			date:new Date()
 		};
+		this.markAsComplete=this.markAsComplete.bind(this)
 	}
 	componentDidMount() {
     //fetch stuff here
   }
+	markAsComplete = () => {
+		this.setState(state=>({objective:Object.assign(this.state.objective,{completed:true})}));
+	}
 
   handleNewUserMessage = (newMessage) => {
     console.log(`New message incomig! ${newMessage}`);
@@ -78,7 +83,15 @@ class Objective extends React.Component {
         <h1>{this.state.objective.name}</h1>
 					{this.state.isOwned && 
 						<div>
-							<button className="btn btn-success"><i className="fas fa-check"></i> Mark As Complete</button><br/>
+							{!this.state.objective.completed ?
+							<div>
+								<button className="btn btn-success" onClick={this.markAsComplete}><i className="fas fa-check"></i> Mark As Complete</button><br/>
+							</div>
+							:
+							<div>
+								<span class="badge badge-default"><i className="fas fa-check"></i> Completed! </span>
+							</div>
+							}
 						</div>
 					}
 				<p>{this.state.objective.description.split('\n').map( (line,index)=>

@@ -45,3 +45,15 @@ export const getTranslation = (textArray, targetLanguage) => {
     config
   )
 };
+
+export const getGoal = credentials => {
+	const config = {
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(credentials),
+  }
+  return fetch(`${root}login`, config);
+}
+

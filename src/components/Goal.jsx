@@ -14,16 +14,16 @@ const listItem = {
 class Goal extends React.Component {
   constructor(props) {
     super(props);
-
+		console.log('id is',this.props.match.params.id)
     this.state = {
 			isOwned:this.props.match.params.userId !== undefined,
 			goal:{
 				name:"Open A Bank Account",
-
+				description:"Open a Savings or Checking Account at a local back.",
 				milestones:[
-					{name:"Identification Card",id:1,isComplete:true},
-					{name:"Utility Bill",isComplete:false,id:2},
-					{name:"Deposit",isComplete:true,id:3}
+					{name:"Identification Card",id:1,completed:true},
+					{name:"Utility Bill",completed:false,id:2},
+					{name:"Deposit",completed:true,id:3}
 				]
 			},
 			date:new Date()
@@ -42,11 +42,14 @@ class Goal extends React.Component {
     return (
       <div>
         <h3>{this.state.goal.name}</h3>
+				<p>{this.state.goal.description.split('\n').map( (line,index)=>
+				<span key={index}><br/>{line}</span>
+				)}</p>
 					<ul>
 					{this.state.goal.milestones.map((milestone)=>
 						<li style={listItem} key={milestone.id}>
 								<div style={inline}>
-								{this.state.isOwned && milestone.isComplete ?
+								{this.state.isOwned && milestone.completed ?
 								<i className="far fa-check-square"></i>
 								:
 								<i className="far fa-square"></i>
