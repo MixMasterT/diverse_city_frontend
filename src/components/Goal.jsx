@@ -11,24 +11,16 @@ const inline = {
 const listItem = {
 	listStyleType:"none"
 }
+
 class Goal extends React.Component {
   constructor(props) {
     super(props);
-		console.log('id is',this.props.match.params.id)
+
     this.state = {
-			isOwned:this.props.match.params.userId !== undefined,
-			goal:{
-				name:"Open A Bank Account",
-				description:"Open a Savings or Checking Account at a local back.",
-				milestones:[
-					{name:"Identification Card",id:1,completed:true},
-					{name:"Utility Bill",completed:false,id:2},
-					{name:"Deposit",completed:true,id:3}
-				]
-			},
-			date:new Date()
+			date: new Date(),
 		};
-		  }
+  }
+
 	componentDidMount() {
     addResponseMessage("Welcome to this awesome chat!");
   }
@@ -41,32 +33,48 @@ class Goal extends React.Component {
   render() {
     return (
       <div>
-        <h3>{this.state.goal.name}</h3>
-				<p>{this.state.goal.description.split('\n').map( (line,index)=>
-				<span key={index}><br/>{line}</span>
-				)}</p>
-					<ul>
-					{this.state.goal.milestones.map((milestone)=>
-						<li style={listItem} key={milestone.id}>
-								<div style={inline}>
-								{this.state.isOwned && milestone.completed ?
-								<i className="far fa-check-square"></i>
-								:
-								<i className="far fa-square"></i>
-								}
+        <h3>{this.props.goal.name}</h3>
+				<p>
+          {this.props.goal.description.split('\n').map((line, index)=>
+            <span key={index}><br/>{line}</span>
+				  )}
+        </p>
+				<div className="list-group milestone-list-group">
+					{this.props.goal.milestones.map((milestone)=>
+						<div key={milestone.muid} className="list-group-item milestone-link">
+								<div className="milestone-icon">
+                  {this.state.isOwned && milestone.completed ?
+                    <i className="far fa-check-square"></i>
+                  :
+                    <i className="far fa-square"></i>
+                  }
 								</div>
-							<Link to={this.state.isOwned? `/objective/${this.props.match.params.userId}/${this.props.match.params.goalId}/${milestone.id}` : `/objective/${this.props.match.params.goalId}/${milestone.id}`}>{milestone.name}</Link>
-						</li>
+                <Link to={this.state.isOwned? `/objective/${this.props.userPhone}/${this.props.goal.g_id}/${milestone.muid}` : `/objective/${this.props.goal.g_id}/${milestone.muid}`}>{milestone.name}</Link>
+            </div>
 					)}
-					</ul>
-					{!this.state.isOwned &&
-						<div>
-							<button className="btn btn-primary"><i className="fas fa-plus"></i> Add</button><br/>
-						</div>
-					}
+				</div>
+				{!this.props.isOwned &&
+					<div className="text-center">
+						<button
+              id="start-goal"
+              className="btn btn-primary"
+              onClick={this.props.assignGoal(this.props.goal.g_id)}
+              >
+                <i className="fas fa-plus"></i>
+                Start Goal
+              </button>
+              <br/>
+					</div>
+				}
       </div>
     );
   }
+}
+
+Goal.propTypes = {
+  isOwner: PropTypes.bool,
+  goal: PropTypes.object,
+  assignGoal: PropTypes.func
 }
 
 
