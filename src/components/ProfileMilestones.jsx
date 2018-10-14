@@ -10,7 +10,7 @@ const ProfileMilestones = ({ user }) =>
       {user.goals && user.goals.length > 0 ? (
         <ul>
           {user.goals.map(goal => (
-            <div key={goal.id} className="list-group">
+            <div key={goal._id} className="list-group">
               <h5>{goal.name}</h5>
               <p>{goal.description}</p>
             </div>
