@@ -12,8 +12,9 @@ const ProfileSettings = ({logout, history, user}) => {
     history.push('/login');
   }
   let logoutButton = '';
+  console.log('user: ', user);
   if(user) {
-    logoutButton = <Button onClick={handleLogout} style={buttonStyles}>Logout</Button>    
+    logoutButton = <Button onClick={handleLogout} style={buttonStyles}>Logout</Button>
   }
   return (
   <div className="ProfileSettings d-flex flex-column justify-content-between ">
