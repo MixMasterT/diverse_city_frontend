@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Jumbotron, Container, Navbar, NavLink } from "reactstrap";
 
 import Browse from "./components/Browse";
-import ProfileMilestones from "./containers/ProfileMilestones";
+import ProfileGoals from "./containers/ProfileGoals";
 import ProfileSettings from "./containers/ProfileSettings";
 import GoalsContainer from "./containers/GoalsContainer";
 import Signup from "./components/Signup";
@@ -29,7 +29,7 @@ class App extends Component {
           <Jumbotron>
             <Container fluid>
               <Route exact path="/" component={Browse} />
-              <Route exact path="/profile" component={ProfileMilestones} />
+              <Route exact path="/profile" component={ProfileGoals} />
               <Route exact path="/settings" component={ProfileSettings} />
               <Route exact path="/goals" component={GoalsContainer} />
               <Route exact path="/signup" component={Signup} />
