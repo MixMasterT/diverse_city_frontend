@@ -133,6 +133,7 @@ class Signup extends Component {
     } else {
       return (
         <Form className="signup">
+          <h3 className="text-center">Sign Up</h3>
           {phoneAlert}
           <FormGroup>
             <Label for="username">Phone Number</Label>
