@@ -82,22 +82,22 @@ class SelectLanguage extends Component {
     const state = this.state;
     return (
       <div>
-        <h3 className="text-center">{!state.translation ? state.pageText.selectLanguage : state.translation.selectLanguage}</h3>
+        <h3 className="text-center">{!this.props.translation ? state.pageText.selectLanguage : this.props.translation.translation.selectLanguage}</h3>
         <Row>
           <Col xs="12">
-            {!state.translation ? state.pageText.preferredLanguage : state.translation.preferredLanguage}: {this.state.selectedLanguage || 'none'}
+            {!this.props.translation ? state.pageText.preferredLanguage : this.props.translation.translation.preferredLanguage}: {this.state.selectedLanguage || 'none'}
           </Col>
         </Row>
         <Form>
           <Row>
             <Col sm="6">
               <FormGroup>
-                <Label>{!this.props.translation ? state.pageText.filterLanguages : this.props.translation.filterLanguages}</Label>
+                <Label>{!this.props.translation ? state.pageText.filterLanguages : this.props.translation.translation.filterLanguages}</Label>
                 <Input onChange={this.updateFilterTerm} />
               </FormGroup>
             </Col>
             <Col sm="6">
-              <Button onClick={this.clearFilter}>{!this.props.translation ? state.pageText.clearFilter : this.props.translation.clearFilter}</Button>
+              <Button onClick={this.clearFilter}>{!this.props.translation ? state.pageText.clearFilter : this.props.translation.translation.clearFilter}</Button>
             </Col>
           </Row>
 
@@ -106,7 +106,7 @@ class SelectLanguage extends Component {
           <thead>
             <tr>
               <th xs="2">#</th>
-              <th xs="10">{!this.props.translation ? state.pageText.language : this.props.translation.language}</th>
+              <th xs="10">{!this.props.translation ? state.pageText.language : this.props.translation.translation.language}</th>
             </tr>
           </thead>
           <tbody>
@@ -130,7 +130,7 @@ class SelectLanguage extends Component {
         >
           <ModalHeader>{!this.props.translation ? state.pageText.success : `${this.props.translation.translation.success}`}!</ModalHeader>
           <ModalBody>
-            {!this.props.translation ? state.pageText.youSelected : this.props.translation.youSelected} <mark>{this.state.selectedLanguage}</mark> {!state.translation ? state.pageText.asPreferred : state.translation.asPreferred}.
+            {!this.props.translation ? state.pageText.youSelected : this.props.translation.translation.youSelected} <mark>{this.state.selectedLanguage}</mark> {!this.props.translation ? state.pageText.asPreferred : this.props.translation.translation.asPreferred}.
           </ModalBody>
           <ModalFooter>
             <Row
@@ -141,14 +141,14 @@ class SelectLanguage extends Component {
                 color="primary"
                 onClick={() => this.props.history.push('/login')}
               >
-                {!this.props.translation ? state.pageText.moveOn : this.props.translation.moveOn}
+                {!this.props.translation ? state.pageText.moveOn : this.props.translation.translation.moveOn}
               </Button>
               <Button
                 color="warning"
                 onClick={() => this.closeAndClear()}
                 style={{marginLeft: '2rem'}}
               >
-                {!this.props.translation ? state.pageText.chooseDifferent : this.props.translation.chooseDifferent}
+                {!this.props.translation ? state.pageText.chooseDifferent : this.props.translation.translation.chooseDifferent}
               </Button>
             </Row>
           </ModalFooter>
