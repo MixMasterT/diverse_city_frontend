@@ -27,6 +27,21 @@ export const loginUser = credentials => {
   return fetch(`${root}login`, config);
 };
 
-export const getStlWeather = () => {
-  return null;
+export const getTranslation = (textArray, targetLanguage) => {
+  const requestBody = {
+    text: textArray,
+    target_language: targetLanguage.language,
+  };
+  const config = {
+    method: "post",
+    header: {
+      "Content-Type": "application/json"
+    },
+    mode: "cors",
+    body: JSON.stringify(requestBody),
+  };
+  return fetch(
+    'https://q6io8ynkgd.execute-api.us-east-1.amazonaws.com/dev/translatearray',
+    config
+  )
 };
