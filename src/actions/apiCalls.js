@@ -2,7 +2,7 @@
   apiCalls
 */
 
-const root = "http://localhost:8080/api/";
+const root = "https://globalhack-7-1904labs.herokuapp.com/api/";
 
 export const postUser = user => {
   const config = {
