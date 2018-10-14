@@ -46,13 +46,95 @@ export const getTranslation = (textArray, targetLanguage) => {
   )
 };
 
-export const getGoal = credentials => {
+export const getGoal = (id) => {
 	const config = {
     method: 'get',
     headers: {
       'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(credentials),
+    }
   }
-  return fetch(`${root}login`, config);
+  return fetch(`${root}goals/${id}`, config);
+}
+
+export const getObjective = (id) => {
+	const config = {
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  return fetch(`${root}milestones/${id}`, config);
+}
+
+export const getSummaries = (id) => {
+	const config = {
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  return fetch(`${root}summaries/${id}`, config);
+}
+
+export const getUser = (phone) => {
+	const config = {
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  return fetch(`${root}users/${phone}`, config);
+}
+
+export const getScore = (text) => {
+	const requestBody = {
+    text:text,
+    "target_language": "es",
+    "iterations": 5
+}
+	const config = {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+		body: JSON.stringify(requestBody),
+  }
+  return fetch(`https://q6io8ynkgd.execute-api.us-east-1.amazonaws.com/dev/verify`, config)
+		.then(function(response) {
+				return response.json();
+			});
+}
+
+export const getSummary = (chatLines) => {
+	const requestBody = {
+    text:chatLines
+}
+	const config = {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+		body: JSON.stringify(requestBody),
+  }
+  return fetch(`https://dudjjedajc.execute-api.us-east-1.amazonaws.com/dev/convert`, config)
+		.then(function(response) {
+				return response.json();
+			});
+}
+
+export const saveSummary = (summaryText,milestoneId) => {
+	const requestBody = {
+    summaryText:summaryText,
+}
+	const config = {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+		body: JSON.stringify(requestBody),
+  }
+  return fetch(`${root}summaries/${milestoneId}`, config)
+		.then(function(response) {
+				return response.json();
+			});
 }
