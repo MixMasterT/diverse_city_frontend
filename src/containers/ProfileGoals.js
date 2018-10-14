@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadUserGoals: () => dispatch(fetchUser())
+  loadUser: () => dispatch(fetchUser()),
 });
 
 export default connect(
