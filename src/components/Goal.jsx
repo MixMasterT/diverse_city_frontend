@@ -15,9 +15,10 @@ const listItem = {
 class Goal extends React.Component {
   constructor(props) {
     super(props);
+    this.checkBox = this.checkBox.bind(this);
 
     this.state = {
-			date: new Date(),
+			date: new Date()
 		};
   }
 
@@ -30,6 +31,10 @@ class Goal extends React.Component {
     // Now send the message throught the backend API
   }
 
+  checkBox = (milestone, goalId) => (e) => {
+    this.props.markMilestoneComplete(milestone.muid, goalId);
+  };
+
   render() {
     return (
       <div>
@@ -39,33 +44,50 @@ class Goal extends React.Component {
             <span key={index}><br/>{line}</span>
 				  )}
         </p>
-				<div className="list-group milestone-list-group">
-					{this.props.goal.milestones.map((milestone)=>
-						<div key={milestone.muid} className="list-group-item milestone-link">
-								<div className="milestone-icon">
-                  {this.state.isOwned && milestone.completed ?
-                    <i className="far fa-check-square"></i>
-                  :
-                    <i className="far fa-square"></i>
-                  }
-								</div>
-                <Link to={this.state.isOwned? `/objective/${this.props.userPhone}/${this.props.goal.g_id}/${milestone.muid}` : `/objective/${this.props.goal.g_id}/${milestone.muid}`}>{milestone.name}</Link>
-            </div>
-					)}
-				</div>
-				{!this.props.isOwned &&
-					<div className="text-center">
-						<button
+        {this.props.isOwned ? (
+          <div className="list-group milestone-list-group">
+  					{this.props.goal.milestones.map((milestone) =>
+  						<div key={milestone.muid} className="list-group-item milestone-link">
+  								<div className="milestone-icon">
+                    {milestone.completed ?
+                      <input type="checkbox" checked onChange={this.checkBox(milestone, this.props.goal.g_id)} />
+                      :
+                      <input type="checkbox" onChange={this.checkBox(milestone, this.props.goal.g_id)} />
+                    }
+  								</div>
+                  <Link to={this.state.isOwned? `/objective/${this.props.userPhone}/${this.props.goal.g_id}/${milestone.muid}` : `/objective/${this.props.goal.g_id}/${milestone.muid}`}>{milestone.name}</Link>
+              </div>
+  					)}
+  				</div>
+        ) : (
+          <div>
+          <div className="list-group milestone-list-group">
+  					{this.props.goal.milestones.map((milestone) =>
+  						<div key={milestone.muid} className="list-group-item milestone-link">
+  								<div className="milestone-icon">
+                    {this.state.isOwned && milestone.completed ?
+                      <i className="far fa-check-square"></i>
+                    :
+                      <i className="far fa-square"></i>
+                    }
+  								</div>
+                  <Link to={this.state.isOwned? `/objective/${this.props.userPhone}/${this.props.goal.g_id}/${milestone.muid}` : `/objective/${this.props.goal.g_id}/${milestone.muid}`}>{milestone.name}</Link>
+              </div>
+  					)}
+  				</div>
+  				<div className="text-center">
+  					<button
               id="start-goal"
               className="btn btn-primary"
               onClick={this.props.assignGoal(this.props.goal.g_id)}
-              >
-                <i className="fas fa-plus"></i>
+            >
+              <i className="fas fa-plus"></i>
                 Start Goal
-              </button>
-              <br/>
-					</div>
-				}
+            </button>
+            <br/>
+  				</div>
+        </div>
+        )}
       </div>
     );
   }
