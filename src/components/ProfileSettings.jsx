@@ -6,15 +6,19 @@ import {
 } from 'reactstrap';
 
 const buttonStyles = { margin: '1rem'};
-const ProfileSettings = ({logout, history}) => {
+const ProfileSettings = ({logout, history, user}) => {
   const handleLogout = () => {
     logout();
     history.push('/login');
   }
+  let logoutButton = '';
+  if(user) {
+    logoutButton = <Button onClick={handleLogout} style={buttonStyles}>Logout</Button>    
+  }
   return (
   <div className="ProfileSettings d-flex flex-column justify-content-between ">
-    <h3>Settings</h3>
-    <Button onClick={handleLogout} style={buttonStyles}>Logout</Button>
+    <h3 className="text-center">Settings</h3>
+    {logoutButton}
     <Button
       onClick={() => history.push('/select_language')}
       style={buttonStyles}

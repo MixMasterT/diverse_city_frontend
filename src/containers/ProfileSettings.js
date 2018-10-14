@@ -5,6 +5,10 @@ import { logoutUser } from '../actions/userActions';
 
 import ProfileSettings from '../components/ProfileSettings';
 
+const mapStateToProps = state => ({
+  user: state.userReducer.user
+});
+
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logoutUser()),
 });

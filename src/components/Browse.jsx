@@ -18,7 +18,7 @@ class Browse extends React.Component {
 
     return (
       <div className="browse">
-        <h3>Home</h3>
+        <h3 className="text-center">Home</h3>
         <FormGroup>
           <Input
           id="goal-search"

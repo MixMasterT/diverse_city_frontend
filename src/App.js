@@ -12,6 +12,7 @@ import Login from './components/Login';
 import SelectLanguage from './containers/SelectLanguage';
 import Goal from "./containers/Goal";
 import Objective from "./components/Objective";
+import Logo from "./components/Logo";
 
 import {fetchAllGoals} from "./actions/goalActions";
 
@@ -37,6 +38,7 @@ class App extends Component {
     return (
       <Router>
         <div className="app">
+          <Logo />
           <Jumbotron>
             <Container fluid>
               <Route exact path="/browse" component={Browse} />
