@@ -53,7 +53,7 @@ class Signup extends Component {
     const user = this.state.user;
     const errors = {}
     if(this.validateUser()) {
-      this.props.postUser(user);
+      this.props.postUser(user, this.props.history);
     }
   }
 
