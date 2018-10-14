@@ -10,7 +10,6 @@ export const postUser = (userObject) => async (dispatch) => {
     console.log('Error posting user: ', error);
     return;
   };
-  // console.log('postUserResponse: ', postUserResponse.body;
   if(postUserResponse.ok) {
     const user = await postUserResponse.json();
     return dispatch({
@@ -19,13 +18,11 @@ export const postUser = (userObject) => async (dispatch) => {
     });
   } else {
     const message = await (await postUserResponse).text();
-    console.log('postUserResponse.body: ', message);
-    console.log('message: ', message);
     return dispatch(receiveApiError(message));
   }
 }
 
-export const loginUser = (credentials) => async (dispatch) => {
+export const loginUser = (credentials, history) => async (dispatch) => {
   let loginUserResponse;
   try {
     loginUserResponse = await apiCalls.loginUser(credentials);
@@ -35,12 +32,14 @@ export const loginUser = (credentials) => async (dispatch) => {
   };
   if(loginUserResponse.ok) {
     const user = await loginUserResponse.json();
-    console.log('user: ', user);
+    console.log('history: ', history);
+    history.push('/home'); // redirect to home screen upon successful login
     return dispatch({
       type: RECEIVE_USER,
       user,
     });
   } else {
-    return receiveApiError(loginUserResponse.statusText);
+    const message = await (await loginUserResponse).text();
+    return dispatch(receiveApiError(message));
   }
 }

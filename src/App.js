@@ -10,6 +10,7 @@ import Browse from './components/Browse';
 import ProfileMilestones from './containers/ProfileMilestones';
 import ProfileSettings from './containers/ProfileSettings';
 import Signup from './components/Signup';
+import Login from './components/Login';
 
 class App extends Component {
   constructor(props) {
@@ -35,6 +36,7 @@ toggle() {
               <Route exact path="/profile" component={ProfileMilestones} />
               <Route exact path="/settings" component={ProfileSettings} />
               <Route exact path="/signup" component={Signup} />
+              <Route exact path="/login" component={Login} />
             </Container>
           </Jumbotron>
           <Navbar>

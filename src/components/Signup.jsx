@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
+  Row,
+  Col,
   Form,
   FormGroup,
   Label,
@@ -12,7 +14,6 @@ import {
   ModalFooter } from 'reactstrap';
 import { postUser } from '../actions/userActions';
 import { resolveError } from '../actions/errorActions';
-
 
 class Signup extends Component {
   constructor(props) {
@@ -126,49 +127,56 @@ class Signup extends Component {
       }
       return `(${number.slice(0, 3)})${number.slice(3, 6)}-${number.slice(6, 10)}`;
     }
-    return (
-      <Form className="signup">
-        {phoneAlert}
-        <FormGroup>
-          <Label for="username">Phone Number</Label>
-          <Input
-            type="text"
-            placeholder="Phone Number"
-            onChange={this.updatePhoneNumber}
-            value={formatPhone(this.state.user.phone)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="password">Password</Label>
-          <Input
-            type="password"
-            placeholder="Password"
-            onChange={this.updateField('password')}
-            value={this.state.user.password}
-          />
-        </FormGroup>
-        {passwordAlert}
-        <FormGroup>
-          <Label for="confirmPassword">Verify Password</Label>
-          <Input
-            type="password"
-            placeholder="Password"
-            onChange={this.updateField('confirmPassword')}
-            value={this.state.user.confirmPassword}
-          />
-        </FormGroup>
-        <Button onClick={this.postUser}>Register</Button>
-        <Modal isOpen={!!hasApiError}>
-          <ModalHeader>Error!</ModalHeader>
-          {userErrorAlert}
-          <ModalFooter>
-            <Button onClick={this.resolveAlert}>
-              OK, got it.
-            </Button>
-          </ModalFooter>
-        </Modal>
-      </Form>
-    )
+    if(this.props.user && this.props.user._id) {
+      this.props.router.push('/home');
+    } else {
+      return (
+        <Form className="signup">
+          {phoneAlert}
+          <FormGroup>
+            <Label for="username">Phone Number</Label>
+            <Input
+              type="text"
+              placeholder="Phone Number"
+              onChange={this.updatePhoneNumber}
+              value={formatPhone(this.state.user.phone)}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="password">Password</Label>
+            <Input
+              type="password"
+              placeholder="Password"
+              onChange={this.updateField('password')}
+              value={this.state.user.password}
+            />
+          </FormGroup>
+          {passwordAlert}
+          <FormGroup>
+            <Label for="confirmPassword">Verify Password</Label>
+            <Input
+              type="password"
+              placeholder="Password"
+              onChange={this.updateField('confirmPassword')}
+              value={this.state.user.confirmPassword}
+            />
+          </FormGroup>
+          <Row>
+            <Col xs="6"><Button onClick={this.postUser}>Register</Button></Col>
+            <Col xs="6">Already registered? <a href="/login">Go to login instead.</a></Col>
+          </Row>
+          <Modal isOpen={!!hasApiError}>
+            <ModalHeader>Error!</ModalHeader>
+            {userErrorAlert}
+            <ModalFooter>
+              <Button onClick={this.resolveAlert}>
+                OK, got it.
+              </Button>
+            </ModalFooter>
+          </Modal>
+        </Form>
+      )
+    }
   }
 }
 

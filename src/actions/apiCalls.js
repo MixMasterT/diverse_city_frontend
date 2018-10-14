@@ -18,7 +18,10 @@ export const postUser = (user) => {
 
 export const loginUser = (credentials) => {
   const config = {
-    method: 'POST',
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json'
+    },
     body: JSON.stringify(credentials),
   }
   return fetch(`${root}login`, config);
