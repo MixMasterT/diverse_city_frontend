@@ -1,4 +1,4 @@
-import * as apiCalls from './apiCalls';
+import * as apiCalls from "./apiCalls";
 import { receiveApiError } from './errorActions';
 
 const DEFAULT_LOGGED_IN_SCREEN = '/browse';
@@ -61,3 +61,26 @@ export const logoutUser = () => dispatch => {
     type: CLEAR_USER,
   })
 }
+
+export const fetchUser = () => (dispatch, getState) => {
+  const userPhone = getState().userReducer.user.phone;
+  dispatch({type: "FETCH_USER"});
+
+  const config = {
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  };
+
+  fetch(`${apiCalls.root}users/${userPhone}`, config).then((response) => {
+    const body = response.json();
+    return body.then(user => {
+      if (user) {
+        return dispatch({type: "RECEIVE_USER", user});
+      } else {
+        return dispatch({type: "RECEIVE_API_ERROR"});
+      }
+    })
+  });
+};

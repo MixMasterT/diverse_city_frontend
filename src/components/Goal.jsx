@@ -40,7 +40,7 @@ class Goal extends React.Component {
   render() {
     return (
       <div>
-        <h1>{this.state.goal.name}</h1>
+        <h3>{this.state.goal.name}</h3>
 					<ul>
 					{this.state.goal.milestones.map((milestone)=>
 						<li style={listItem} key={milestone.id}>

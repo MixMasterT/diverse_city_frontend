@@ -16,7 +16,7 @@ class Browse extends React.Component {
 
     return (
       <div className="browse">
-        <h4>Home</h4>
+        <h3>Home</h3>
         <FormGroup>
           <Input
           id="goal-search"
@@ -28,9 +28,9 @@ class Browse extends React.Component {
           />
         </FormGroup>
         <h5>{`What are your goals?`}</h5>
-          { !this.props.goalsFetching && this.props.goals ? (
+          { !this.props.goalsReducer.fetching && this.props.goalsReducer.goals ? (
           <div className="list-group">
-            {this.props.goals.map((goal) => (
+            {this.props.goalsReducer.goals.map((goal) => (
               <a key={goal.g_id} className="list-group-item goal-link" href={buildGoalLink(goal)}>
                 {goal.name}
               </a>
@@ -47,8 +47,7 @@ class Browse extends React.Component {
 
 Browse.propTypes = {
   searchText: PropTypes.string,
-  goals: PropTypes.arrayOf(PropTypes.object),
-  goalsFetching: PropTypes.bool,
+  goalsReducer: PropTypes.object,
   searchGoals: PropTypes.func
 };
 

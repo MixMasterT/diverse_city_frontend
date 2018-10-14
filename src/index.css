@@ -45,6 +45,7 @@ nav.navbar {
 
 .goal-link {
   color: inherit;
+  border: 0 !important;
 }
 
 .clickable {
@@ -53,4 +54,8 @@ nav.navbar {
 
 nav a {
   color: var(--grey);
+}
+
+.profile-goals .fa-th-list {
+  color: var(--green);
 }

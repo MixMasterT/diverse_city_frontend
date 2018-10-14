@@ -8,8 +8,7 @@ import Browse from '../components/Browse';
 
 const mapStateToProps = state => ({
   searchText: '',
-  goals: state.goalReducer.goals,
-  goalsFetching: state.goalReducer ? state.goalReducer.fetching : false
+  goalsReducer: state.goalReducer
 });
 
 const mapDispatchToProps = dispatch => ({

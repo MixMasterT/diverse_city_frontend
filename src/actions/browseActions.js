@@ -12,13 +12,13 @@ export const fetchAllGoals = () => (dispatch) => {
   };
 
   fetch(`${root}goals`, config).then((response) => {
-    const goals = response.json();
-    return goals.then(goalArray => {
-      if (goalArray) {
-        return dispatch({type: "UPDATE_GOALS", goals: goalArray});
-      } else {
-        return dispatch({type: RECEIVE_API_ERROR});
-      }
-    })
+    const body = response.json();
+    console.log(body);
+    body.then(goals => {
+      console.log(goals);
+      return dispatch({type: "UPDATE_GOALS", goals})
+    }).catch(
+      (e) => dispatch({type: RECEIVE_API_ERROR, error: e})
+    );
   });
 };
