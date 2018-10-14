@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import { Jumbotron, Container, Navbar, NavLink } from "reactstrap";
+import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+import { Jumbotron, Container, Navbar } from "reactstrap";
 
 import Browse from "./containers/Browse";
 import ProfileGoals from "./containers/ProfileGoals";
@@ -47,16 +47,16 @@ class App extends Component {
             </Container>
           </Jumbotron>
           <Navbar>
-            <NavLink href="/browse">
+            <NavLink to="/browse">
               <i className="fa fa-home fa-2x" />
             </NavLink>
-            <NavLink href="/profile">
+            <NavLink to="/profile">
               <i className="fa fa-th-list fa-2x" />
             </NavLink>
-            <NavLink href="/">
+            <NavLink to="/">
               <i className="fa fa-comments fa-2x" />
             </NavLink>
-            <NavLink href="/settings">
+            <NavLink to="/settings">
               <i className="fa fa-cog fa-2x" />
             </NavLink>
           </Navbar>

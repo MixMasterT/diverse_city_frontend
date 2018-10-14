@@ -30,7 +30,7 @@ code {
 }
 
 .jumbotron {
-  min-height: calc(100% - 65px);
+  min-height: calc(100% - 50px);
   margin-bottom: 0;
   border-radius: 0;
   background-color: #FFFFFF;
