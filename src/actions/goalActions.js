@@ -26,6 +26,8 @@ export const fetchAllGoals = () => (dispatch) => {
 export const assignGoal = (goalId) => (dispatch, getState) => {
   const userPhone = getState().userReducer.user.phone;
 
+  dispatch({type: "FETCH_USER"});
+
   const config = {
     method: 'post',
     headers: {
@@ -40,7 +42,36 @@ export const assignGoal = (goalId) => (dispatch, getState) => {
   fetch(`${root}users/assign`, config).then((response) => {
     const body = response.json();
     body.then(user => {
-      return dispatch({type: "RECEIVE_USER", user})
+      dispatch({type: "RECEIVE_USER", user});
+    })
+    .catch(
+      (e) => dispatch({type: RECEIVE_API_ERROR, error: e})
+    );
+  });
+  return null;
+};
+
+export const markMilestoneComplete = (milestoneId, goalId) => (dispatch, getState) => {
+  const userId = getState().userReducer.user._id;
+
+  dispatch({type: "FETCH_USER"});
+
+  const config = {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      id: userId,
+      goalId: goalId,
+      milestoneId: milestoneId
+    })
+  };
+
+  fetch(`${root}milestones/complete`, config).then((response) => {
+    const body = response.json();
+    body.then(user => {
+      dispatch({type: "RECEIVE_USER", user});
     })
     .catch(
       (e) => dispatch({type: RECEIVE_API_ERROR, error: e})

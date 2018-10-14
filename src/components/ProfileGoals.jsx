@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
 
+import { Progress } from 'reactstrap';
+
 class ProfileGoals extends React.Component {
   componentDidMount() {
       this.props.loadUser();
@@ -12,12 +14,21 @@ class ProfileGoals extends React.Component {
       return `goal/${userId}/${goalId}`;
     };
     var milestonesComplete = goal => {
-        return goal.milestones.reduce((accum, value, index) => {
+        const numComplete = goal.milestones.reduce((accum, value, index) => {
           if (value.completed){
               return (accum + 1);
           }
           return accum;
         }, 0);
+        const total = goal.milestones.length;
+
+        let width;
+        if (numComplete === 0){
+          width = 0;
+        } else {
+          width = (numComplete / total);
+        }
+        return (width * 100) + '%';
     };
 
     return (
@@ -33,7 +44,7 @@ class ProfileGoals extends React.Component {
                 <Link key={goal.g_id} className="list-group-item goal-link" to={buildGoalLink(this.props.user.phone, goal.g_id)}>
                   <div>{goal.name}</div>
                     <div className="progress">
-                      <div className="progress-bar" role="progressbar" aria-valuenow={milestonesComplete(goal)} aria-valuemin="0" aria-valuemax={goal.milestones.length}></div>
+                      <div className="progress-bar" role="progressbar" style={ {width: milestonesComplete(goal)} } aria-valuenow={75} aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </Link>
               ))}
@@ -56,7 +67,7 @@ class ProfileGoals extends React.Component {
 
 ProfileGoals.propTypes = {
   user: PropTypes.object,
-  loadUser: PropTypes.func
+  loadUser: PropTypes.func,
 };
 
 export default ProfileGoals;
