@@ -21,7 +21,9 @@ export default (state = DEFAULT_STATE, action) => {
         user: action.user,
       };
     case CLEAR_USER:
-      return null;
+      return {
+        user: null
+      };
     default:
       return state;
   }

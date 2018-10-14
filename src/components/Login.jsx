@@ -35,6 +35,12 @@ class Login extends Component {
     this.validateUser = this.validateUser.bind(this);
   }
 
+  componentWillMount() {
+    if(this.props.user) {
+      this.props.history.push('/browse');
+    }
+  }
+
   validateUser() {
     const user = this.state.user;
     const errors = {};
