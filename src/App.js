@@ -9,7 +9,7 @@ import ProfileSettings from "./containers/ProfileSettings";
 import GoalsContainer from "./containers/GoalsContainer";
 import Signup from "./components/Signup";
 import Login from './components/Login';
-import SelectLanguage from './components/SelectLanguage';
+import SelectLanguage from './containers/SelectLanguage';
 import Goal from "./containers/Goal";
 import Objective from "./components/Objective";
 
