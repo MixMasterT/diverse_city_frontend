@@ -16,14 +16,29 @@ import {
   ModalFooter } from 'reactstrap';
 import gcpLanguages from '../static_assets/gcp_languages.json';
 import { receiveLanguage, clearLanguage } from '../actions/languageActions';
+import { fetchTranslation } from '../actions/translationActions';
 
 class SelectLanguage extends Component {
   constructor(props) {
     super(props);
+    this.pageText = {
+      selectLanguage: 'Select Language',
+      preferredLanguage: 'Your preferred language',
+      filterLanguages: 'Filter Languages',
+      clearFilter: 'Clear Filter',
+      language: 'Language',
+      success: 'Success',
+      youSelected: 'You have selected',
+      asPreferred: 'as your preferred language',
+      moveOn: 'Move On',
+      chooseDifferent: 'Choose a different language',
+      selectedLanguage: this.props.language ? this.props.language.name : null
+    };
     this.state = {
       selectedLanguage: this.props.language || null,
       filterTerm: '',
       modalIsOpen: false,
+      pageText: this.pageText,
     };
     this.updateFilterTerm = this.updateFilterTerm.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
@@ -47,6 +62,8 @@ class SelectLanguage extends Component {
       modalIsOpen: true,
     });
     this.props.selectLanguage(language);
+    this.pageText.selectedLanguage = language.name;
+    this.props.fetchTranslation(this.pageText, language, 'selectLanguage')
   }
 
   toggleModal() {
@@ -63,23 +80,25 @@ class SelectLanguage extends Component {
     const filteredLanguages = gcpLanguages.filter(l => (
       -1 < l.name.toLowerCase().indexOf(term.toLowerCase())
     ));
+    const state = this.state;
     return (
       <div>
+        <h3 className="text-center">{!this.props.translation ? state.pageText.selectLanguage : this.props.translation.translation.selectLanguage}</h3>
         <Row>
           <Col xs="12">
-            Your selected language: {this.state.selectedLanguage || 'none'}
+            {!this.props.translation ? state.pageText.preferredLanguage : this.props.translation.translation.preferredLanguage}: {!this.props.translation ? this.state.selectedLanguage || 'none' : this.props.translation.translation.selectedLanguage}
           </Col>
         </Row>
         <Form>
           <Row>
             <Col sm="6">
               <FormGroup>
-                <Label>Filter Languages</Label>
+                <Label>{!this.props.translation ? state.pageText.filterLanguages : this.props.translation.translation.filterLanguages}</Label>
                 <Input onChange={this.updateFilterTerm} />
               </FormGroup>
             </Col>
             <Col sm="6">
-              <Button onClick={this.clearFilter}>Clear Filter</Button>
+              <Button onClick={this.clearFilter}>{!this.props.translation ? state.pageText.clearFilter : this.props.translation.translation.clearFilter}</Button>
             </Col>
           </Row>
 
@@ -88,7 +107,7 @@ class SelectLanguage extends Component {
           <thead>
             <tr>
               <th xs="2">#</th>
-              <th xs="10">Language</th>
+              <th xs="10">{!this.props.translation ? state.pageText.language : this.props.translation.translation.language}</th>
             </tr>
           </thead>
           <tbody>
@@ -108,10 +127,11 @@ class SelectLanguage extends Component {
           color="success"
           isOpen={this.state.modalIsOpen}
           toggle={this.toggleModal}
+          props={this.props}
         >
-          <ModalHeader>Success!</ModalHeader>
+          <ModalHeader>{!this.props.translation ? state.pageText.success : `${this.props.translation.translation.success}`}!</ModalHeader>
           <ModalBody>
-            You have selected <mark>{this.state.selectedLanguage}</mark> as your preferred language.
+            {!this.props.translation ? state.pageText.youSelected : this.props.translation.translation.youSelected} <mark>{this.props.translation ? this.props.translation.translation.selectedLanguage : this.state.selectedLanguage}</mark> {!this.props.translation ? state.pageText.asPreferred : this.props.translation.translation.asPreferred}.
           </ModalBody>
           <ModalFooter>
             <Row
@@ -122,14 +142,14 @@ class SelectLanguage extends Component {
                 color="primary"
                 onClick={() => this.props.history.push('/login')}
               >
-                Move On
+                {!this.props.translation ? state.pageText.moveOn : this.props.translation.translation.moveOn}
               </Button>
               <Button
                 color="warning"
                 onClick={() => this.closeAndClear()}
                 style={{marginLeft: '2rem'}}
               >
-                Choose a different language
+                {!this.props.translation ? state.pageText.chooseDifferent : this.props.translation.translation.chooseDifferent}
               </Button>
             </Row>
           </ModalFooter>
@@ -142,6 +162,7 @@ class SelectLanguage extends Component {
 const mapDispatchToProps = dispatch => ({
   selectLanguage: (language) => dispatch(receiveLanguage(language)),
   clearLanguage: () => dispatch(clearLanguage()),
+  fetchTranslation: (textArray, targetLanguage, key) => dispatch(fetchTranslation(textArray, targetLanguage, key)),
 });
 
 export default connect(null, mapDispatchToProps)(withRouter(SelectLanguage));
