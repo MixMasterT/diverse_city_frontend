@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import {
   Table,
   Row,
@@ -8,9 +9,13 @@ import {
   FormGroup,
   Label,
   Input,
-  Button } from 'reactstrap';
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter } from 'reactstrap';
 import gcpLanguages from '../static_assets/gcp_languages.json';
-import { receiveLanguage } from '../actions/languageActions';
+import { receiveLanguage, clearLanguage } from '../actions/languageActions';
 
 class SelectLanguage extends Component {
   constructor(props) {
@@ -18,10 +23,12 @@ class SelectLanguage extends Component {
     this.state = {
       selectedLanguage: this.props.language || null,
       filterTerm: '',
+      modalIsOpen: false,
     };
     this.updateFilterTerm = this.updateFilterTerm.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.clearFilter = this.clearFilter.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
   updateFilterTerm(e) {
@@ -35,8 +42,20 @@ class SelectLanguage extends Component {
   }
 
   handleSelect(language) {
-    this.setState({ selectedLanguage: language.name });
+    this.setState({
+      selectedLanguage: language.name,
+      modalIsOpen: true,
+    });
     this.props.selectLanguage(language);
+  }
+
+  toggleModal() {
+    this.setState({ modalIsOpen: !this.state.modalIsOpen });
+  }
+
+  closeAndClear() {
+    this.setState({ modalIsOpen: false, selectedLanguage: null });
+    this.props.clearLanguage();
   }
 
   render() {
@@ -85,6 +104,36 @@ class SelectLanguage extends Component {
             ))}
           </tbody>
         </Table>
+        <Modal
+          color="success"
+          isOpen={this.state.modalIsOpen}
+          toggle={this.toggleModal}
+        >
+          <ModalHeader>Success!</ModalHeader>
+          <ModalBody>
+            You have selected <mark>{this.state.selectedLanguage}</mark> as your preferred language.
+          </ModalBody>
+          <ModalFooter>
+            <Row
+              className="d-flex justify-content-between align-items-center"
+              style={{marginRight: '2rem'}}
+            >
+              <Button
+                color="primary"
+                onClick={() => this.props.history.push('/login')}
+              >
+                Move On
+              </Button>
+              <Button
+                color="warning"
+                onClick={() => this.closeAndClear()}
+                style={{marginLeft: '2rem'}}
+              >
+                Choose a different langauge
+              </Button>
+            </Row>
+          </ModalFooter>
+        </Modal>
       </div>
     )
   }
@@ -92,6 +141,7 @@ class SelectLanguage extends Component {
 
 const mapDispatchToProps = dispatch => ({
   selectLanguage: (language) => dispatch(receiveLanguage(language)),
+  clearLanguage: () => dispatch(clearLanguage()),
 });
 
-export default connect(null, mapDispatchToProps)(SelectLanguage);
+export default connect(null, mapDispatchToProps)(withRouter(SelectLanguage));

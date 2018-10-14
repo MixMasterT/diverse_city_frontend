@@ -13,7 +13,7 @@ export const receiveLanguage = (language) => dispatch => {
   });
 }
 
-export const resolveError = () => dispatch => {
+export const clearLanguage = () => dispatch => {
   return dispatch({
     type: CLEAR_LANGUAGE,
   });
