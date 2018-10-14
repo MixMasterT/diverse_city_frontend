@@ -17,7 +17,8 @@ export const fetchAllGoals = () => (dispatch) => {
     body.then(goals => {
       console.log(goals);
       return dispatch({type: "UPDATE_GOALS", goals})
-    }).catch(
+    })
+    .catch(
       (e) => dispatch({type: RECEIVE_API_ERROR, error: e})
     );
   });

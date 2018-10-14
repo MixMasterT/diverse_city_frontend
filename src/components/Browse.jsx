@@ -38,7 +38,10 @@ class Browse extends React.Component {
             ))}
           </div>
         ) : (
-          <div><i className="fa fa-spinner fa-spin fa-1x fa-fw" /> Loading Goals</div>
+          <div>
+            <div><i className="fa fa-spinner fa-spin fa-1x fa-fw" /> </div>
+            Loading Goals
+          </div>
         )}
       </div>
     );
