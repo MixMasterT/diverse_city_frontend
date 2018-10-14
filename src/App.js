@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {connect} from 'react-redux';
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import { Jumbotron, Container, Navbar } from "reactstrap";
 
@@ -12,6 +13,8 @@ import SelectLanguage from './components/SelectLanguage';
 import Goal from "./containers/Goal";
 import Objective from "./components/Objective";
 
+import {fetchAllGoals} from "./actions/browseActions";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -19,6 +22,10 @@ class App extends Component {
       modal: false
     };
     this.toggle = this.toggle.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.init();
   }
 
   toggle() {
@@ -65,4 +72,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => ({
+  init: () => {
+    dispatch(fetchAllGoals);
+  },
+});
+
+export default connect(null, mapDispatchToProps)(App);
