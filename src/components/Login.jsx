@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import {
   Row,
   Col,
@@ -154,7 +154,7 @@ class Login extends Component {
         {passwordAlert}
         <Row>
           <Col xs="6"><Button onClick={this.logUserIn}>Login</Button></Col>
-          <Col xs="6">Not yet registered? <a href="/signup">Go to Signup instead.</a></Col>
+          <Col xs="6">Not yet registered? <Link to="/signup">Go to Signup instead.</Link></Col>
         </Row>
         <Modal isOpen={!!hasApiError}>
           <ModalHeader>Error!</ModalHeader>

@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Link} from 'react-router-dom';
 
 var buildGoalLink = goal => {
   return `goals/${goal._id}`;
@@ -15,9 +16,9 @@ const GoalsList = ({ user, goals }) => (
       {goals.map(goal => (
         <div key={goal._id} className="list-group">
           <span>
-            <a className="goal-link" href={buildGoalLink(goal)}>
+            <Link className="goal-link" to={buildGoalLink(goal)}>
               {goal.description}
-            </a>
+            </Link>
           </span>
         </div>
       ))}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import {
   Row,
   Col,
@@ -165,7 +165,7 @@ class Signup extends Component {
           </FormGroup>
           <Row>
             <Col xs="6"><Button onClick={this.postUser}>Register</Button></Col>
-            <Col xs="6">Already registered? <a href="/login">Go to login instead.</a></Col>
+            <Col xs="6">Already registered? <Link href="/login">Go to login instead.</Link></Col>
           </Row>
           <Modal isOpen={!!hasApiError}>
             <ModalHeader>Error!</ModalHeader>

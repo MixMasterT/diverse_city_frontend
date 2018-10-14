@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Link} from 'react-router-dom';
 
 const ProfileGoals = ({ user }) =>
   user ? (
@@ -19,13 +20,13 @@ const ProfileGoals = ({ user }) =>
         </ul>
       ) : (
         <span>
-          No Goals yet. Please check them out here <a href="goals">here</a>
+          No Goals yet. Please check them out here <Link to="goals">here</Link>
         </span>
       )}
     </div>
   ) : (
     <span>
-      Please Login <a href="login">here</a>
+      Please Login <Link href="login">here</Link>
     </span>
   );
 

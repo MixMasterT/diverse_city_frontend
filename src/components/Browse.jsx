@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import {Link} from "react-router-dom";
+
 import {FormGroup, Input} from 'reactstrap';
 
 
@@ -31,14 +33,14 @@ class Browse extends React.Component {
           { !this.props.goalsReducer.fetching && this.props.goalsReducer.goals ? (
           <div className="list-group">
             {this.props.goalsReducer.goals.map((goal) => (
-              <a key={goal.g_id} className="list-group-item goal-link" href={buildGoalLink(goal)}>
+              <Link key={goal.g_id} className="list-group-item goal-link" to={buildGoalLink(goal)}>
                 {goal.name}
-              </a>
+              </Link>
 
             ))}
           </div>
         ) : (
-          <div>
+          <div className="flex">
             <div><i className="fa fa-spinner fa-spin fa-1x fa-fw" /> </div>
             Loading Goals
           </div>

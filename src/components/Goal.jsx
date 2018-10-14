@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 import { Widget,addResponseMessage } from 'react-chat-widget';
 import 'react-chat-widget/lib/styles.css';
 
@@ -51,7 +52,7 @@ class Goal extends React.Component {
 								<i className="far fa-square"></i>
 								}
 								</div>
-							<a href={this.state.isOwned? `/objective/${this.props.match.params.userId}/${this.props.match.params.goalId}/${milestone.id}` : `/objective/${this.props.match.params.goalId}/${milestone.id}`}>{milestone.name}</a>
+							<Link to={this.state.isOwned? `/objective/${this.props.match.params.userId}/${this.props.match.params.goalId}/${milestone.id}` : `/objective/${this.props.match.params.goalId}/${milestone.id}`}>{milestone.name}</Link>
 						</li>
 					)}
 					</ul>

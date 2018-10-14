@@ -59,3 +59,7 @@ nav a {
 .profile-goals .fa-th-list {
   color: var(--green);
 }
+
+.flex {
+  display: flex;
+}
