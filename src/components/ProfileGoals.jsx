@@ -20,7 +20,7 @@ const ProfileGoals = ({ user }) =>
         </ul>
       ) : (
         <span>
-          No Goals yet. Please check them out here <Link to="goals">here</Link>
+          No Goals yet. Please check them out here <Link to="browse">here</Link>
         </span>
       )}
     </div>

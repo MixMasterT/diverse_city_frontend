@@ -11,24 +11,16 @@ const inline = {
 const listItem = {
 	listStyleType:"none"
 }
+
 class Goal extends React.Component {
   constructor(props) {
     super(props);
 		console.log('id is',this.props.match.params.id)
     this.state = {
-			isOwned:this.props.match.params.userId !== undefined,
-			goal:{
-				name:"Open A Bank Account",
-				description:"Open a Savings or Checking Account at a local back.",
-				milestones:[
-					{name:"Identification Card",id:1,completed:true},
-					{name:"Utility Bill",completed:false,id:2},
-					{name:"Deposit",completed:true,id:3}
-				]
-			},
 			date:new Date()
 		};
-		  }
+  }
+
 	componentDidMount() {
     addResponseMessage("Welcome to this awesome chat!");
   }
@@ -39,6 +31,8 @@ class Goal extends React.Component {
   }
 
   render() {
+    console.log(this.props);
+    console.log(this.state);
     return (
       <div>
         <h3>{this.state.goal.name}</h3>
@@ -46,7 +40,7 @@ class Goal extends React.Component {
 				<span key={index}><br/>{line}</span>
 				)}</p>
 					<ul>
-					{this.state.goal.milestones.map((milestone)=>
+					{this.props.goal.milestones.map((milestone)=>
 						<li style={listItem} key={milestone.id}>
 								<div style={inline}>
 								{this.state.isOwned && milestone.completed ?
@@ -59,7 +53,7 @@ class Goal extends React.Component {
 						</li>
 					)}
 					</ul>
-					{!this.state.isOwned &&
+					{!this.props.isOwned &&
 						<div>
 							<button className="btn btn-primary"><i className="fas fa-plus"></i> Add</button><br/>
 						</div>
@@ -67,6 +61,11 @@ class Goal extends React.Component {
       </div>
     );
   }
+}
+
+Goal.propTypes = {
+  isOwner: PropTypes.bool,
+  goal: PropTypes.object
 }
 
 

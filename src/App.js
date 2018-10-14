@@ -9,7 +9,7 @@ import GoalsContainer from "./containers/GoalsContainer";
 import Signup from "./components/Signup";
 import Login from './components/Login';
 import SelectLanguage from './components/SelectLanguage';
-import Goal from "./components/Goal";
+import Goal from "./containers/Goal";
 import Objective from "./components/Objective";
 
 class App extends Component {
@@ -35,7 +35,6 @@ class App extends Component {
               <Route exact path="/browse" component={Browse} />
               <Route exact path="/profile" component={ProfileGoals} />
               <Route exact path="/settings" component={ProfileSettings} />
-              <Route exact path="/goals" component={GoalsContainer} />
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/" component={SelectLanguage} />
