@@ -7,7 +7,7 @@ const floatLeft={
 	float:"left",
 	clear:"both",
 	left:"-1em",
-	"margin-right":"1em"
+	"marginRight":"1em"
 }
 
 const floatRight={
@@ -15,8 +15,8 @@ const floatRight={
 	float:"right",
 	clear:"both",
 	right:"-1em",
-	"margin-left":"1em",
-	'font-style':"italic"
+	"marginLeft":"1em",
+	'fontStyle':"italic"
 }
 
 const theRest={
@@ -75,8 +75,8 @@ class Objective extends React.Component {
     return (
       <div>
         <h1>{this.state.objective.name}</h1>
-				<p>{this.state.objective.description.split('\n').map(line=>
-				<span><br/>{line}</span>
+				<p>{this.state.objective.description.split('\n').map( (line,index)=>
+				<span key={index}><br/>{line}</span>
 				)}</p>
 					
 					<div className="form-group">
@@ -84,24 +84,24 @@ class Objective extends React.Component {
 						<hr />
 						<ul  style={theRest}>
 							{this.state.objective.chat.messages.map((msg,index)=>
-								<li style={index%2==0 ? floatLeft : floatRight}>{msg}</li>
+								<li key={index} style={index%2==0 ? floatLeft : floatRight}>{msg}</li>
 							)}
 						</ul>
 						<hr />
 						{this.state.objective.chat.messages.length > 0 &&
 							<p style={theRest}>
-							<button style={floatRight} className="btn btn-secondary"><i className="fa fa-check"></i> This conversation has been resolved</button>
+							<button style={floatRight} className="btn btn-secondary"><i className="fas fa-comment-check"></i> Resolve This Convesation</button>
 							</p>
 						}
-						<label for="newMsg">New Message:</label><input className="form-control" id="newMsg" type="text"/>
+						<label htmlFor="newMsg">New Message:</label><input className="form-control" id="newMsg" type="text"/>
 						<button className="btn btn-primary">Send</button><br/>
 					</div>
 					
 					<h2>Summaries of previous conversations</h2>
 					
 					<ul>
-					{this.state.objective.summaries.map((lesson)=>
-						<li>{lesson}</li>
+					{this.state.objective.summaries.map((lesson,index)=>
+						<li key={index} >{lesson}</li>
 					)}
 					</ul>
       </div>
