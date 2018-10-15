@@ -25,7 +25,9 @@ const theRest={
 	display:"block",
 	overflow:"hidden"
 }
-
+const stuff = {
+	textAlign:"center"
+}
 const showIt = {
 	display:"block"
 }
@@ -167,6 +169,12 @@ class Objective extends React.Component {
 	sendMessage = () => {
 		const saveMessage = (msg) => {
 			console.log('sent ',msg);
+			let msgs= this.state.objective.chat.messages
+			msgs.push(msg)
+			this.setState(state=>({
+			objective:Object.assign(this.state.objective,{
+			chat:Object.assign(this.state.objective.chat,{messages:msgs})
+			})}));
 		}
 		
 		getScore(this.state.newMessage)
@@ -185,7 +193,7 @@ class Objective extends React.Component {
   render() {
     return (
       <div>
-        <h1>{this.state.objective.name}</h1>
+        <h1 style={stuff}>{this.state.objective.name}</h1>
 					{this.state.isOwned && 
 						<div>
 							{!this.state.objective.completed ?
@@ -239,7 +247,7 @@ class Objective extends React.Component {
 					</ul>
 					
 					
-					<div className="modal fade show" style={this.state.showModal ? showIt : dontShow} id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div className="modal fade show" style={this.state.showModal ? showIt : dontShow} id="myModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						<div className="modal-dialog" role="document">
 							<div className="modal-content">
 								<div className="modal-header">
