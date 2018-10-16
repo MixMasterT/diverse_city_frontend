@@ -2,13 +2,13 @@
   apiCalls
 */
 
-export const root = 'https://globalhack-7-1904labs.herokuapp.com/api/';
-// export const root = 'http://localhost:8080/api/';
+// export const root = 'https://globalhack-7-1904labs.herokuapp.com/api/';
+export const root = 'http://localhost:8080/api/';
 
 const getConfig = (method, requestBody) => {
   const config = {
     method: method,
-    mode: "no-cors",
+    mode: "cors",
     headers: {
       "Content-Type": "application/json"
     }
