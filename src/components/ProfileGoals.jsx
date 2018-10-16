@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Link} from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import { Progress } from 'reactstrap';
 
 class ProfileGoals extends React.Component {
   componentDidMount() {
-      this.props.loadUser();
+      this.props.loadUser(this.props.user, this.props.history);
   }
 
   render () {
@@ -70,4 +70,4 @@ ProfileGoals.propTypes = {
   loadUser: PropTypes.func,
 };
 
-export default ProfileGoals;
+export default withRouter(ProfileGoals);

@@ -1,7 +1,8 @@
 import * as apiCalls from "./apiCalls";
-import { receiveApiError } from './errorActions';
+import { receiveApiError, receiveFrontendError } from './errorActions';
 
 const DEFAULT_LOGGED_IN_SCREEN = '/browse';
+const LOGIN_PATH = '/login';
 
 const storeUserLocally = (user) => {
   localStorage.setItem('user', JSON.stringify(user));
@@ -62,25 +63,58 @@ export const logoutUser = () => dispatch => {
   })
 }
 
-export const fetchUser = () => (dispatch, getState) => {
-  const userPhone = getState().userReducer.user.phone;
-  dispatch({type: "FETCH_USER"});
-
-  const config = {
-    method: 'get',
-    headers: {
-      'Content-Type': 'application/json'
-    },
+export const fetchUser = (user, history) => async dispatch => {
+  if(!user) {
+    history.push(LOGIN_PATH);
+    return;
+  }
+  if(!user.phone) {
+    return dispatch(receiveFrontendError('Cannot fetch user with no phone number!'));
+  }
+  let getUserReponse;
+  try {
+    getUserReponse = await apiCalls.getUser(user.phone);
+  } catch(error) {
+    console.log('Error posting user: ', error);
+    return;
   };
+  if(getUserReponse.ok) {
+    const user = await getUserReponse.json();
+    storeUserLocally(user);
+    history.push('DEFAULT_LOGGED_IN_SCREEN');
+    return dispatch({
+      type: RECEIVE_USER,
+      user,
+    });
+  } else {
+    const message = await (await getUserReponse).text();
+    return dispatch(receiveApiError(message));
+  }
+}
 
-  fetch(`${apiCalls.root}users/${userPhone}`, config).then((response) => {
-    const body = response.json();
-    return body.then(user => {
-      if (user) {
-        return dispatch({type: "RECEIVE_USER", user});
-      } else {
-        return dispatch({type: "RECEIVE_API_ERROR"});
-      }
-    })
-  });
-};
+// export const fetchUser = () => (dispatch, getState) => {
+//   const user = getState().userReducer.user;
+//   if(!user) {
+//
+//   }
+//   const userPhone = user.phone;
+//   dispatch({type: "FETCH_USER"});
+//
+//   const config = {
+//     method: 'get',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//   };
+//
+//   fetch(`${apiCalls.root}users/${userPhone}`, config).then((response) => {
+//     const body = response.json();
+//     return body.then(user => {
+//       if (user) {
+//         return dispatch({type: "RECEIVE_USER", user});
+//       } else {
+//         return dispatch({type: "RECEIVE_API_ERROR"});
+//       }
+//     })
+//   });
+// };
