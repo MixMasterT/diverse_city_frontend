@@ -75,13 +75,12 @@ export const fetchUser = (user, history) => async dispatch => {
   try {
     getUserReponse = await apiCalls.getUser(user.phone);
   } catch(error) {
-    console.log('Error posting user: ', error);
+    console.log('Error fetching user: ', error);
     return;
   };
   if(getUserReponse.ok) {
     const user = await getUserReponse.json();
     storeUserLocally(user);
-    history.push('DEFAULT_LOGGED_IN_SCREEN');
     return dispatch({
       type: RECEIVE_USER,
       user,
