@@ -7,14 +7,14 @@ export const root = 'https://globalhack-7-1904labs.herokuapp.com/api/';
 
 const getConfig = (method, requestBody) => {
   const config = {
-    method: method,
-    mode: "cors",
-    headers: {
+    method,
+    mode: 'cors',
+    header: {
       "Content-Type": "application/json"
     }
   };
   if(requestBody) {
-    config.requestBody = JSON.stringify(requestBody);
+    config.body = JSON.stringify(requestBody);
   }
   return config;
 };
@@ -25,7 +25,8 @@ export const postUser = user => {
 };
 
 export const loginUser = credentials => {
-  const config = getConfig('post', credentials)
+  const config = getConfig('post', credentials);
+  console.log('call to login user with config: ', config);
   return fetch(`${root}login`, config);
 };
 
