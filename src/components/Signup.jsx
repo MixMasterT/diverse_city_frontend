@@ -19,6 +19,21 @@ import { resolveError } from '../actions/errorActions';
 class Signup extends Component {
   constructor(props) {
     super(props);
+    this.pageText = {
+      //TODO: Change these to appropriate terms to interpolate text on page.
+      selectLanguage: 'Select Language',
+      preferredLanguage: 'Your preferred language',
+      filterLanguages: 'Filter Languages',
+      clearFilter: 'Clear Filter',
+      language: 'Language',
+      success: 'Success',
+      youSelected: 'You have selected',
+      asPreferred: 'as your preferred language',
+      moveOn: 'Continue',
+      chooseDifferent: 'Choose a different language',
+      selectedLanguage: this.props.language ? this.props.language.name : null
+    };
+    
     this.state = {
       user: {
         password: '',
