@@ -90,30 +90,3 @@ export const fetchUser = (user, history) => async dispatch => {
     return dispatch(receiveApiError(message));
   }
 }
-
-// export const fetchUser = () => (dispatch, getState) => {
-//   const user = getState().userReducer.user;
-//   if(!user) {
-//
-//   }
-//   const userPhone = user.phone;
-//   dispatch({type: "FETCH_USER"});
-//
-//   const config = {
-//     method: 'get',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//   };
-//
-//   fetch(`${apiCalls.root}users/${userPhone}`, config).then((response) => {
-//     const body = response.json();
-//     return body.then(user => {
-//       if (user) {
-//         return dispatch({type: "RECEIVE_USER", user});
-//       } else {
-//         return dispatch({type: "RECEIVE_API_ERROR"});
-//       }
-//     })
-//   });
-// };
