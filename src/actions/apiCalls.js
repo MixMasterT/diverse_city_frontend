@@ -9,7 +9,7 @@ const getConfig = (method, requestBody) => {
   const config = {
     method,
     mode: 'cors',
-    header: {
+    headers: {
       "Content-Type": "application/json"
     }
   };
