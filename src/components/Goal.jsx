@@ -11,6 +11,9 @@ const inline = {
 const listItem = {
 	listStyleType:"none"
 }
+const stuff = {
+	textAlign:"center"
+}
 
 class Goal extends React.Component {
   constructor(props) {
@@ -38,7 +41,7 @@ class Goal extends React.Component {
   render() {
     return (
       <div>
-        <h3>{this.props.goal.name}</h3>
+        <h3 style={stuff}>{this.props.goal.name}</h3>
 				<p>
           {this.props.goal.description.split('\n').map((line, index)=>
             <span key={index}><br/>{line}</span>
