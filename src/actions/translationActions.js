@@ -2,6 +2,8 @@ import { getTranslation } from './apiCalls';
 import { receiveApiError } from './errorActions';
 
 export const RECEIVE_TRANSLATION = 'RECEIVE_TRANSLATION';
+export const CLEAR_LANGUAGE = 'CLEAR_LANGUAGE';
+
 
 export const fetchTranslation = (textArray, targetLanguage, key) => async (dispatch) => {
   let translationResult;

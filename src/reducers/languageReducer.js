@@ -16,7 +16,7 @@ export default (state = storedLanguage, action) => {
         language: action.language,
       };
     case CLEAR_LANGUAGE:
-      return null;
+      return  null;
     default:
       return state;
   }

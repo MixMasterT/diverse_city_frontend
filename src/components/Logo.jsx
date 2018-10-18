@@ -3,5 +3,7 @@ import logo from "../static_assets/ladder-trophy-thumb.jpg";
 
 
 export default () => (
-    <img src={logo} style={{width:"5rem", padding: "0.5rem", position:"fixed"}} alt='LaddersUS' />
+    <div style={{position:"relative", margin:"0 auto"}}>
+        <img src={logo} style={{width:"5rem", padding: "0.5rem", position:"relative", left:"50%"}} alt='LaddersUS' />
+    </div>
 );

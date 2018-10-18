@@ -1,7 +1,9 @@
 import {root} from "./apiCalls";
 import {RECEIVE_API_ERROR} from './errorActions';
+import { fetchTranslation } from '../actions/translationActions';
 
-export const fetchAllGoals = () => (dispatch) => {
+
+export const fetchAllGoals = () => (dispatch, getState) => {
   dispatch({type: "FETCH_GOALS"});
 
   const config = {
@@ -13,7 +15,12 @@ export const fetchAllGoals = () => (dispatch) => {
 
   fetch(`${root}goals`, config).then((response) => {
     const body = response.json();
+    // const language = getState.languageReducer.language;
     body.then(goals => {
+      // TODO Translation would go here but I had to deal with other BS first *grumble grumble*
+      // if (language.language !== "en") {
+      //   await dispatch(fetchTranslation);
+      // }
       return dispatch({type: "UPDATE_GOALS", goals})
     })
     .catch(

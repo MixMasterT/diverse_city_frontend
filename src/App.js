@@ -12,7 +12,6 @@ import Login from './components/Login';
 import SelectLanguage from './containers/SelectLanguage';
 import Goal from "./containers/Goal";
 import Objective from "./components/Objective";
-import Logo from "./components/Logo";
 
 import {fetchAllGoals} from "./actions/goalActions";
 
@@ -38,15 +37,14 @@ class App extends Component {
     return (
       <Router>
         <div className="app">
-          <Logo />
           <Jumbotron>
             <Container fluid>
+              <Route exact path="/" component={SelectLanguage} />
+              <Route exact path="/signup" component={Signup} />
+              <Route exact path="/login" component={Login} /> 
               <Route exact path="/browse" component={Browse} />
               <Route exact path="/profile" component={ProfileGoals} />
               <Route exact path="/settings" component={ProfileSettings} />
-              <Route exact path="/signup" component={Signup} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/" component={SelectLanguage} />
               <Route exact path="/select_language" component={SelectLanguage} />
               <Route exact path="/goal/:goalId" component={Goal} />
 							<Route exact path="/goal/:userId/:goalId" component={Goal} />
@@ -76,7 +74,7 @@ class App extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   init: () => {
-    dispatch(fetchAllGoals);
+    // dispatch(fetchAllGoals);
   },
 });
 

@@ -7,6 +7,10 @@ const mapStateToProps = state => ({
   translation: state.translation
 });
 
+// const mapDispatchToProps = dispatch => ({
+//   clearLanguage: () => dispatch()
+// })
+
 export default connect(
   mapStateToProps,
   {}

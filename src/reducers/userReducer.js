@@ -1,13 +1,12 @@
 /*
   User Reducer
 */
-import { mockUser } from "../fixtures/mockUser";
 import { RECEIVE_USER, CLEAR_USER } from '../actions/userActions';
 
 const WHICH_STATE = "Dev";
 var DEFAULT_STATE = {};
 if (WHICH_STATE === "Dev") {
-  DEFAULT_STATE = { user: mockUser || {} };
+  DEFAULT_STATE = { user: {} };
 }
 const storedUser = JSON.parse(localStorage.getItem('user'));
 

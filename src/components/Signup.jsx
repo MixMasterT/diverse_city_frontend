@@ -15,6 +15,7 @@ import {
   ModalFooter } from 'reactstrap';
 import { postUser } from '../actions/userActions';
 import { resolveError } from '../actions/errorActions';
+import Logo from './Logo';
 
 class Signup extends Component {
   constructor(props) {
@@ -110,6 +111,7 @@ class Signup extends Component {
   }
 
   render() {
+    
     const user = this.state.user
     const passwordMisMatch = user.password.length > 0 &&
                               user.confirmPassword.length > 0 &&
@@ -147,7 +149,9 @@ class Signup extends Component {
       this.props.router.push('/home');
     } else {
       return (
+        
         <Form className="signup">
+          <Logo />
           <h3 className="text-center">Sign Up</h3>
           {phoneAlert}
           <FormGroup>

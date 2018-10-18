@@ -1,7 +1,7 @@
 /*
   Translation Reducer
 */
-import { RECEIVE_TRANSLATION } from '../actions/translationActions';
+import { RECEIVE_TRANSLATION, CLEAR_LANGUAGE } from '../actions/translationActions';
 
 const translation = (state = null, action) => {
   switch (action.type) {
@@ -9,7 +9,9 @@ const translation = (state = null, action) => {
       return {
         translation: action.translation,
       };
-    default:
+    case CLEAR_LANGUAGE:
+      return null;
+    default: 
       return state;
   }
 };

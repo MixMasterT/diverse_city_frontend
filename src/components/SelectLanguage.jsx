@@ -17,6 +17,7 @@ import {
 import gcpLanguages from '../static_assets/gcp_languages.json';
 import { receiveLanguage, clearLanguage } from '../actions/languageActions';
 import { fetchTranslation } from '../actions/translationActions';
+import Logo from './Logo';
 
 class SelectLanguage extends Component {
   constructor(props) {
@@ -73,6 +74,7 @@ class SelectLanguage extends Component {
   closeAndClear() {
     this.setState({ modalIsOpen: false, selectedLanguage: null });
     this.props.clearLanguage();
+    this.pageText.selectedLanguage = null;
   }
 
   render() {
@@ -83,6 +85,7 @@ class SelectLanguage extends Component {
     const state = this.state;
     return (
       <div>
+        <Logo />
         <h3 className="text-center">{!this.props.translation ? state.pageText.selectLanguage : this.props.translation.translation.selectLanguage}</h3>
         <Row>
           <Col xs="12">
