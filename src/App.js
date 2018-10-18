@@ -61,9 +61,6 @@ class App extends Component {
             <NavLink to="/profile">
               <i className="fa fa-th-list fa-2x" />
             </NavLink>
-            <NavLink to="/">
-              <i className="fa fa-comments fa-2x" />
-            </NavLink>
             <NavLink to="/settings">
               <i className="fa fa-cog fa-2x" />
             </NavLink>
