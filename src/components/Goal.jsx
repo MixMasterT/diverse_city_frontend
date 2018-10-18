@@ -58,7 +58,7 @@ class Goal extends React.Component {
                       <input type="checkbox" onChange={this.checkBox(milestone, this.props.goal.g_id)} />
                     }
   								</div>
-                  <Link to={this.state.isOwned? `/objective/${this.props.userPhone}/${this.props.goal.g_id}/${milestone.muid}` : `/objective/${this.props.goal.g_id}/${milestone.muid}`}>{milestone.name}</Link>
+                  <Link to={this.props.isOwned? `/objective/${this.props.userPhone}/${this.props.goal.g_id}/${milestone.muid}` : `/objective/${this.props.goal.g_id}/${milestone.muid}`}>{milestone.name}</Link>
               </div>
   					)}
   				</div>
@@ -68,13 +68,13 @@ class Goal extends React.Component {
   					{this.props.goal.milestones.map((milestone) =>
   						<div key={milestone.muid} className="list-group-item milestone-link">
   								<div className="milestone-icon">
-                    {this.state.isOwned && milestone.completed ?
+                    {this.props.isOwned && milestone.completed ?
                       <i className="far fa-check-square"></i>
                     :
                       <i className="far fa-square"></i>
                     }
   								</div>
-                  <Link to={this.state.isOwned? `/objective/${this.props.userPhone}/${this.props.goal.g_id}/${milestone.muid}` : `/objective/${this.props.goal.g_id}/${milestone.muid}`}>{milestone.name}</Link>
+                  <Link to={this.props.isOwned? `/objective/${this.props.userPhone}/${this.props.goal.g_id}/${milestone.muid}` : `/objective/${this.props.goal.g_id}/${milestone.muid}`}>{milestone.name}</Link>
               </div>
   					)}
   				</div>
